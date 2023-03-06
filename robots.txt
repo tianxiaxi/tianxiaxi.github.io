@@ -2,7 +2,23 @@ User-agent: *
 
 Disallow: /
 
+Disallow: /2023/03/hello-world/
+
+Disallow: /posts/
+
+Disallow: /tags/blog/
+
 Disallow: /categories/
 
+Disallow: /2023/03/my-first-post/
+
 Disallow: /tags/
+
+Disallow: /categories/tech/
+
+Disallow: /tags/test/
+
+Disallow: /archives/
+
+Disallow: /search/
 
