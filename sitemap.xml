@@ -3,8 +3,29 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://blog.yygz.org/</loc>
-    <lastmod>2023-03-06T22:41:02+08:00</lastmod>
+    <lastmod>2023-03-07T08:37:14+08:00</lastmod>
     <priority>0</priority>
+  </url><url>
+    <loc>https://blog.yygz.org/categories/</loc>
+    <lastmod>2023-03-07T08:37:14+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.yygz.org/soft/</loc>
+    <lastmod>2023-03-07T08:37:14+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.yygz.org/tags/software/</loc>
+    <lastmod>2023-03-07T08:37:14+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.yygz.org/categories/software/</loc>
+    <lastmod>2023-03-07T08:37:14+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.yygz.org/tags/</loc>
+    <lastmod>2023-03-07T08:37:14+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.yygz.org/tags/utils/</loc>
+    <lastmod>2023-03-07T08:37:14+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.yygz.org/soft/personal-recommend-utils/</loc>
+    <lastmod>2023-03-07T08:37:14+08:00</lastmod>
   </url><url>
     <loc>https://blog.yygz.org/2023/03/hello-world/</loc>
     <lastmod>2023-03-06T22:41:02+08:00</lastmod>
@@ -15,13 +36,7 @@
     <loc>https://blog.yygz.org/tags/blog/</loc>
     <lastmod>2023-03-05T08:20:23+08:00</lastmod>
   </url><url>
-    <loc>https://blog.yygz.org/categories/</loc>
-    <lastmod>2023-03-05T08:20:23+08:00</lastmod>
-  </url><url>
     <loc>https://blog.yygz.org/2023/03/my-first-post/</loc>
-    <lastmod>2023-03-05T08:20:23+08:00</lastmod>
-  </url><url>
-    <loc>https://blog.yygz.org/tags/</loc>
     <lastmod>2023-03-05T08:20:23+08:00</lastmod>
   </url><url>
     <loc>https://blog.yygz.org/categories/tech/</loc>
