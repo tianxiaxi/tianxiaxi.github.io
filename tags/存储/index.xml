@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>存储 on 素问小站</title>
+    <link>https://blog.yygz.org/tags/%E5%AD%98%E5%82%A8/</link>
+    <description>Recent content in 存储 on 素问小站</description>
+    <image>
+      <title>素问小站</title>
+      <url>https://blog.yygz.org/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://blog.yygz.org/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 09 Mar 2023 08:44:39 +0800</lastBuildDate><atom:link href="https://blog.yygz.org/tags/%E5%AD%98%E5%82%A8/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>前端存储方案</title>
+      <link>https://blog.yygz.org/program/frontend/frontend_storage/</link>
+      <pubDate>Thu, 09 Mar 2023 08:44:39 +0800</pubDate>
+      
+      <guid>https://blog.yygz.org/program/frontend/frontend_storage/</guid>
+      <description>cookie/session cookie cookie是一种客户端会话跟踪技术，用于将网页的数据存储到浏览器中。当关闭浏览器或到过期时间时，cookie将失效。
+cookie存在大小限制，一般个数限制为20~50，大小限制在4KB左右。
+cookie在每次请求时将携带在HTTP头中，如果cookie保存过多数据可能存在性能问题。
+Caution:
+浏览器可能禁用cookie 不要利用cookie保存隐私数据 设置HttpOnly属性可避免XSS攻击 session session为会话数据，保存在Web服务器上，主要负责访问者与网站之间的交互。
+HTML5新增存储方案 HTML5中新增存储方案，包括sessionStorage、localStorage、WebSQL、IndexedDB。下列所有存储方案均遵循同源策略限制。
+localStorage localStorage生命周期是永久，可实现数据持久化存储。除非用户手动清除，否则localStorage存储的数据一直保存在浏览器中。
+localStorage的大小一般为5MB，不参与与服务端的通信。
+Caution: localStorage在浏览器隐私模式下不可读取；存储内容多会消耗内存空间，导致页面卡顿。
+sessionStorage sessionStorage仅在当前会话下有效，关闭页面或者浏览器后被清理并失效。
+sessionStorage的大小一般为5MB。
+Caution: sessionStorage无法跨Tab共享： 打开新页面时，将导致session失效；通过Duplicate 复制Tab时，sessionStorage失效。故在持久化存储时，优先考虑localStorage。
+WebSQL WebSQL数据库API不是HTML5规范的一部分，但它是一个独立的规范，引入一组使用SQL操作客户端数据库的API。
+WebSQL与关系数据库的概念相似，支持openDatabase/transaction/executeSQL 等操作，在Chrome浏览器中支持，一般情况下较少使用，作为临时存储或缓存使用。
+Caution: 仅Chrome、Safari、Opera支持，IE、Firefox等浏览器不支持。
+IndexedDB IndexedDB是浏览器提供的本地数据库存储，允许存储大容量数据，提供查找接口、建立索引等功能；但IndexedDB不支持SQL，接近NoSQL数据库。
+IndexedDB具有键值存储、异步、支持事务、同源限制（不支持跨域访问）、大容量（&amp;gt;=250MB）、支持二进制等特性。
+前端框架存储方案介绍 React Redux-persist
+Redux-persist 通过将redux存储的数据缓存到localStorage中实现数据持久化存储。
+react-redux
+React-redux将数据存储在内存中，当页面刷新时，存储的数据将被重置。
+其它存储方案 Cache Storage Cache Storage存储Response对象，即存储HTTP响应。Cache Storage是多个Cache的集合，每个Cache可以存储多个Response对象。
+Cache Storage在浏览器上的引用名是caches而不是驼峰写法的cacheStorage ，它定义在ServiceWorker规范中。
+Application Cache HTML5引入了应用程序缓存技术，意味着web应用可以进行缓存。在没有网络的情况下，通过创建cache manifest文件，可以轻松创建离线应用。目前主流浏览器均支持Application cache。
+Application cache有三个优势：离线浏览、提升页面的载入速度、降低服务器压力。
+Application cache主要存储静态资源。使用时服务端需要维护一个manifest清单，浏览器需要进行简单设置。
+应用场景分析 存储用户登陆状态 在大多数Web应用中，当用户登陆后，后端生成无意义的字符串token ，同时将token返回给前端。前端在后续所有请求中，将token附加到Header中传输到后端，后端进行token校验。前端在存储Token时，主流的如下几种方案：
+sessionStorage: 会话期间内存储，但无法跨浏览器Tab共享数据。
+localStrogage: 永久存储。当token过期时，需要重新设置，涉及同步处理；当网站被XSS注入攻击后，对方可能截取localStorage中的数据；localStorage是同步操作，频繁读取可能存在性能问题。
+cookie: 使用cookie存储用户登陆状态是目前Web开发主流中的主流。</description>
+    </item>
+    
+  </channel>
+</rss>

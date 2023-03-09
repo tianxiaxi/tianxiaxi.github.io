@@ -1,6 +1,34 @@
 User-agent: *
 
+Disallow: /tags/mongoose/
+
+Disallow: /program/network/mongoose/
+
+Disallow: /program/
+
+Disallow: /tags/
+
 Disallow: /
+
+Disallow: /tags/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/
+
+Disallow: /tags/%E5%89%8D%E7%AB%AF/
+
+Disallow: /program/frontend/frontend_storage/
+
+Disallow: /tags/%E5%AD%98%E5%82%A8/
+
+Disallow: /reading/
+
+Disallow: /tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/
+
+Disallow: /reading/note/jixianlin_dushu_yu_zuoren/
+
+Disallow: /program/format/clang_format/
+
+Disallow: /tags/clang-format/
+
+Disallow: /tags/%E4%BB%A3%E7%A0%81%E6%A0%BC%E5%BC%8F%E5%8C%96/
 
 Disallow: /categories/
 
@@ -9,8 +37,6 @@ Disallow: /soft/
 Disallow: /tags/software/
 
 Disallow: /categories/software/
-
-Disallow: /tags/
 
 Disallow: /tags/utils/
 
