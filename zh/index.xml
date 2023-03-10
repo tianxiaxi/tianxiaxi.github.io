@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>素问小站</title>
+    <link>https://blog.yygz.org/zh/</link>
+    <description>Recent content on 素问小站</description>
+    <image>
+      <title>素问小站</title>
+      <url>https://blog.yygz.org/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://blog.yygz.org/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 09 Mar 2023 08:51:57 +0800</lastBuildDate><atom:link href="https://blog.yygz.org/zh/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>About</title>
+      <link>https://blog.yygz.org/zh/about/</link>
+      <pubDate>Fri, 10 Mar 2023 19:47:53 +0800</pubDate>
+      
+      <guid>https://blog.yygz.org/zh/about/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mongoose介绍</title>
+      <link>https://blog.yygz.org/zh/program/network/mongoose/</link>
+      <pubDate>Thu, 09 Mar 2023 08:51:57 +0800</pubDate>
+      
+      <guid>https://blog.yygz.org/zh/program/network/mongoose/</guid>
+      <description>mongoose介绍 mongoose 是一个标准的 C 语言网络通信模块，是嵌入式网络编程的瑞士军刀。mongoose 提供非阻塞的事件驱动的 TCP, UDP, HTTP, WebSocket, CoAP, MQTT 的服务端</description>
+    </item>
+    
+    <item>
+      <title>前端存储方案</title>
+      <link>https://blog.yygz.org/zh/program/frontend/frontend_storage/</link>
+      <pubDate>Thu, 09 Mar 2023 08:44:39 +0800</pubDate>
+      
+      <guid>https://blog.yygz.org/zh/program/frontend/frontend_storage/</guid>
+      <description>cookie/session cookie cookie是一种客户端会话跟踪技术，用于将网页的数据存储到浏览器中。当关闭浏览器或到过期时间时，cookie将失效。 cookie存在大</description>
+    </item>
+    
+    <item>
+      <title>读书笔记 - [季羡林]读书与做人</title>
+      <link>https://blog.yygz.org/zh/reading/note/jixianlin_dushu_yu_zuoren/</link>
+      <pubDate>Thu, 09 Mar 2023 08:19:15 +0800</pubDate>
+      
+      <guid>https://blog.yygz.org/zh/reading/note/jixianlin_dushu_yu_zuoren/</guid>
+      <description>《读书与做人》简介 一代学术宗师季羡林先生，道德高尚，学问渊深，文章亦足以动人。 季老谈读书，深入浅出，举重若轻，以大学者而写作小文章，从中可见</description>
+    </item>
+    
+    <item>
+      <title>Clang format for C/C&#43;&#43;/Java/JavaScript/Object-C</title>
+      <link>https://blog.yygz.org/zh/program/format/clang_format/</link>
+      <pubDate>Thu, 09 Mar 2023 08:12:07 +0800</pubDate>
+      
+      <guid>https://blog.yygz.org/zh/program/format/clang_format/</guid>
+      <description>Clang-format简介 clang-format是一个代码格式化的工具，支持C/C++/Java/JavaScript/Objectiv</description>
+    </item>
+    
+    <item>
+      <title>个人常用工具集</title>
+      <link>https://blog.yygz.org/zh/soft/personal-recommend-utils/</link>
+      <pubDate>Tue, 07 Mar 2023 08:37:14 +0800</pubDate>
+      
+      <guid>https://blog.yygz.org/zh/soft/personal-recommend-utils/</guid>
+      <description>开发必备工具 VSCode Website: https://code.visualstudio.com/ 简介：This is the only editor which I used for my develop career since vscode released. Visual Studio Code is a lightweight but powerful source code editor which runs on your desktop and is available for Windows, macOS and Linux. It comes with built-in support for JavaScript, TypeScript and Node.js and has a rich ecosystem of</description>
+    </item>
+    
+    <item>
+      <title>Hello-world</title>
+      <link>https://blog.yygz.org/zh/posts/hello-world/</link>
+      <pubDate>Mon, 06 Mar 2023 22:41:02 +0800</pubDate>
+      
+      <guid>https://blog.yygz.org/zh/posts/hello-world/</guid>
+      <description>hello world!</description>
+    </item>
+    
+    <item>
+      <title>My First Post</title>
+      <link>https://blog.yygz.org/zh/posts/my-first-post/</link>
+      <pubDate>Sun, 05 Mar 2023 08:20:23 +0800</pubDate>
+      
+      <guid>https://blog.yygz.org/zh/posts/my-first-post/</guid>
+      <description>Introduction This is bold text, and this is emphasized text.
+Visit the Hugo website!</description>
+    </item>
+    
+    
+    
+    
+  </channel>
+</rss>
