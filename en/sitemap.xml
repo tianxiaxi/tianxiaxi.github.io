@@ -3,6 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://blog.yygz.org/en/categories/</loc>
+    <lastmod>2023-03-19T09:41:19+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -14,7 +15,32 @@
                 href="https://blog.yygz.org/en/categories/"
                 />
   </url><url>
+    <loc>https://blog.yygz.org/en/tags/chameleon/</loc>
+    <lastmod>2023-03-19T09:41:19+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.yygz.org/en/tags/flutter/</loc>
+    <lastmod>2023-03-19T09:41:19+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.yygz.org/en/tags/github/</loc>
+    <lastmod>2023-03-19T09:41:19+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.yygz.org/en/categories/github/</loc>
+    <lastmod>2023-03-19T09:41:19+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.yygz.org/en/program/github/github_repo_compare_rax_vsflutter_vstaro_vshippy_vschameleon/</loc>
+    <lastmod>2023-03-19T09:41:19+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.yygz.org/en/tags/hippy/</loc>
+    <lastmod>2023-03-19T09:41:19+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.yygz.org/en/program/</loc>
+    <lastmod>2023-03-19T09:41:19+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.yygz.org/en/tags/rax/</loc>
+    <lastmod>2023-03-19T09:41:19+08:00</lastmod>
+  </url><url>
     <loc>https://blog.yygz.org/en/tags/</loc>
+    <lastmod>2023-03-19T09:41:19+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -26,7 +52,35 @@
                 href="https://blog.yygz.org/en/tags/"
                 />
   </url><url>
+    <loc>https://blog.yygz.org/en/tags/taro/</loc>
+    <lastmod>2023-03-19T09:41:19+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.yygz.org/en/tags/actix-web/</loc>
+    <lastmod>2023-03-15T20:12:33+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.yygz.org/en/tags/axum/</loc>
+    <lastmod>2023-03-15T20:12:33+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.yygz.org/en/program/github/github_repo_compare_axum_vsrocket_vsactix-web/</loc>
+    <lastmod>2023-03-15T20:12:33+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.yygz.org/en/tags/rocket/</loc>
+    <lastmod>2023-03-15T20:12:33+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.yygz.org/en/tags/affine/</loc>
+    <lastmod>2023-03-15T20:03:13+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.yygz.org/en/tags/appflowy/</loc>
+    <lastmod>2023-03-15T20:03:13+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.yygz.org/en/program/github/github_repo_compare_appflowy_vsaffine_vslogseq/</loc>
+    <lastmod>2023-03-15T20:03:13+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.yygz.org/en/tags/logseq/</loc>
+    <lastmod>2023-03-15T20:03:13+08:00</lastmod>
+  </url><url>
     <loc>https://blog.yygz.org/en/</loc>
+    <lastmod>2023-03-10T19:47:53+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -37,5 +91,78 @@
                 hreflang="en"
                 href="https://blog.yygz.org/en/"
                 />
+  </url><url>
+    <loc>https://blog.yygz.org/en/tags/mongoose/</loc>
+    <lastmod>2023-03-09T08:51:57+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.yygz.org/en/program/network/mongoose/</loc>
+    <lastmod>2023-03-09T08:51:57+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.yygz.org/en/tags/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/</loc>
+    <lastmod>2023-03-09T08:51:57+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.yygz.org/en/tags/%E5%89%8D%E7%AB%AF/</loc>
+    <lastmod>2023-03-09T08:44:39+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.yygz.org/en/program/frontend/frontend_storage/</loc>
+    <lastmod>2023-03-09T08:44:39+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.yygz.org/en/tags/%E5%AD%98%E5%82%A8/</loc>
+    <lastmod>2023-03-09T08:44:39+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.yygz.org/en/reading/</loc>
+    <lastmod>2023-03-09T08:19:15+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.yygz.org/en/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2023-03-09T08:19:15+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.yygz.org/2023/03/jixianlin_dushu_yu_zuoren/</loc>
+    <lastmod>2023-03-09T08:19:15+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.yygz.org/en/program/format/clang_format/</loc>
+    <lastmod>2023-03-09T08:12:07+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.yygz.org/en/tags/clang-format/</loc>
+    <lastmod>2023-03-09T08:12:07+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.yygz.org/en/tags/%E4%BB%A3%E7%A0%81%E6%A0%BC%E5%BC%8F%E5%8C%96/</loc>
+    <lastmod>2023-03-09T08:12:07+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.yygz.org/en/soft/</loc>
+    <lastmod>2023-03-07T08:37:14+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.yygz.org/en/tags/software/</loc>
+    <lastmod>2023-03-07T08:37:14+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.yygz.org/en/categories/software/</loc>
+    <lastmod>2023-03-07T08:37:14+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.yygz.org/en/tags/utils/</loc>
+    <lastmod>2023-03-07T08:37:14+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.yygz.org/2023/03/personal-recommend-utils/</loc>
+    <lastmod>2023-03-07T08:37:14+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.yygz.org/en/2023/03/hello-world/</loc>
+    <lastmod>2023-03-06T22:41:02+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.yygz.org/en/posts/</loc>
+    <lastmod>2023-03-06T22:41:02+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.yygz.org/en/tags/blog/</loc>
+    <lastmod>2023-03-05T08:20:23+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.yygz.org/en/2023/03/my-first-post/</loc>
+    <lastmod>2023-03-05T08:20:23+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.yygz.org/en/categories/tech/</loc>
+    <lastmod>2023-03-05T08:20:23+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.yygz.org/en/tags/test/</loc>
+    <lastmod>2023-03-05T08:20:23+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.yygz.org/archives/</loc>
+  </url><url>
+    <loc>https://blog.yygz.org/en/1/01/search.es/</loc>
   </url>
 </urlset>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Rocket on 素问小站</title>
+    <link>https://blog.yygz.org/en/tags/rocket/</link>
+    <description>Recent content in Rocket on 素问小站</description>
+    <image>
+      <title>素问小站</title>
+      <url>https://blog.yygz.org/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://blog.yygz.org/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 15 Mar 2023 20:12:33 +0800</lastBuildDate><atom:link href="https://blog.yygz.org/en/tags/rocket/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Github 开源项目对比分析 - axum VS Rocket VS actix-web</title>
+      <link>https://blog.yygz.org/en/program/github/github_repo_compare_axum_vsrocket_vsactix-web/</link>
+      <pubDate>Wed, 15 Mar 2023 20:12:33 +0800</pubDate>
+      
+      <guid>https://blog.yygz.org/en/program/github/github_repo_compare_axum_vsrocket_vsactix-web/</guid>
+      <description>axum VS Rocket VS actix-web 对比分析 本文档更新时间: 2023-03-15 对比项 axum Rocket actix-web 仓库名称 axum Rocket actix-web 是否公开 public public public 是否归档 未归档 未归档 未归档 创建时间 2021-05-30 09:22:25 2016-03-18 02:50:18 2017-09-30 15:30:02 创建时间(月) 截止</description>
+    </item>
+    
+  </channel>
+</rss>

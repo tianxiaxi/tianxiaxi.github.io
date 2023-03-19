@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Programs on 素问小站</title>
+    <link>https://blog.yygz.org/en/program/</link>
+    <description>Recent content in Programs on 素问小站</description>
+    <image>
+      <title>素问小站</title>
+      <url>https://blog.yygz.org/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://blog.yygz.org/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 19 Mar 2023 09:41:19 +0800</lastBuildDate><atom:link href="https://blog.yygz.org/en/program/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Github项目对比 - rax VS flutter VS taro VS Hippy VS chameleon</title>
+      <link>https://blog.yygz.org/en/program/github/github_repo_compare_rax_vsflutter_vstaro_vshippy_vschameleon/</link>
+      <pubDate>Sun, 19 Mar 2023 09:41:19 +0800</pubDate>
+      
+      <guid>https://blog.yygz.org/en/program/github/github_repo_compare_rax_vsflutter_vstaro_vshippy_vschameleon/</guid>
+      <description>rax VS flutter VS taro VS Hippy VS chameleon 对比分析 本文档更新时间: 2023-03-19 对比项 rax flutter taro Hippy chameleon 仓库名称 rax flutter taro Hippy chameleon 是否公开 public public public public public 是否归档 未归档 未归档 未归档 未归档 未归档 创建时</description>
+    </item>
+    
+    <item>
+      <title>Github 开源项目对比分析 - axum VS Rocket VS actix-web</title>
+      <link>https://blog.yygz.org/en/program/github/github_repo_compare_axum_vsrocket_vsactix-web/</link>
+      <pubDate>Wed, 15 Mar 2023 20:12:33 +0800</pubDate>
+      
+      <guid>https://blog.yygz.org/en/program/github/github_repo_compare_axum_vsrocket_vsactix-web/</guid>
+      <description>axum VS Rocket VS actix-web 对比分析 本文档更新时间: 2023-03-15 对比项 axum Rocket actix-web 仓库名称 axum Rocket actix-web 是否公开 public public public 是否归档 未归档 未归档 未归档 创建时间 2021-05-30 09:22:25 2016-03-18 02:50:18 2017-09-30 15:30:02 创建时间(月) 截止</description>
+    </item>
+    
+    <item>
+      <title>Github 开源项目对比分析 - AppFlowy VS AFFiNE VS logseq</title>
+      <link>https://blog.yygz.org/en/program/github/github_repo_compare_appflowy_vsaffine_vslogseq/</link>
+      <pubDate>Wed, 15 Mar 2023 20:03:13 +0800</pubDate>
+      
+      <guid>https://blog.yygz.org/en/program/github/github_repo_compare_appflowy_vsaffine_vslogseq/</guid>
+      <description>AppFlowy VS AFFiNE VS logseq 对比分析 本文档更新时间: 2023-03-15 对比项 AppFlowy AFFiNE logseq 仓库名称 AppFlowy AFFiNE logseq 是否公开 public public public 是否归档 未归档 未归档 未归档 创建时间 2021-06-16 12:56:48 2022-07-31 18:45:21 2020-05-23 00:06:06 创建时间(月) 截止</description>
+    </item>
+    
+    <item>
+      <title>mongoose介绍</title>
+      <link>https://blog.yygz.org/en/program/network/mongoose/</link>
+      <pubDate>Thu, 09 Mar 2023 08:51:57 +0800</pubDate>
+      
+      <guid>https://blog.yygz.org/en/program/network/mongoose/</guid>
+      <description>mongoose介绍 mongoose 是一个标准的 C 语言网络通信模块，是嵌入式网络编程的瑞士军刀。mongoose 提供非阻塞的事件驱动的 TCP, UDP, HTTP, WebSocket, CoAP, MQTT 的服务端</description>
+    </item>
+    
+    <item>
+      <title>前端存储方案</title>
+      <link>https://blog.yygz.org/en/program/frontend/frontend_storage/</link>
+      <pubDate>Thu, 09 Mar 2023 08:44:39 +0800</pubDate>
+      
+      <guid>https://blog.yygz.org/en/program/frontend/frontend_storage/</guid>
+      <description>cookie/session cookie cookie是一种客户端会话跟踪技术，用于将网页的数据存储到浏览器中。当关闭浏览器或到过期时间时，cookie将失效。 cookie存在大</description>
+    </item>
+    
+    <item>
+      <title>Clang format for C/C&#43;&#43;/Java/JavaScript/Object-C</title>
+      <link>https://blog.yygz.org/en/program/format/clang_format/</link>
+      <pubDate>Thu, 09 Mar 2023 08:12:07 +0800</pubDate>
+      
+      <guid>https://blog.yygz.org/en/program/format/clang_format/</guid>
+      <description>Clang-format简介 clang-format是一个代码格式化的工具，支持C/C++/Java/JavaScript/Objectiv</description>
+    </item>
+    
+  </channel>
+</rss>

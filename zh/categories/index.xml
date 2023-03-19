@@ -10,25 +10,6 @@
       <link>https://blog.yygz.org/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <lastBuildDate>Tue, 07 Mar 2023 08:37:14 +0800</lastBuildDate><atom:link href="https://blog.yygz.org/zh/categories/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>software</title>
-      <link>https://blog.yygz.org/zh/categories/software/</link>
-      <pubDate>Tue, 07 Mar 2023 08:37:14 +0800</pubDate>
-      
-      <guid>https://blog.yygz.org/zh/categories/software/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>tech</title>
-      <link>https://blog.yygz.org/zh/categories/tech/</link>
-      <pubDate>Sun, 05 Mar 2023 08:20:23 +0800</pubDate>
-      
-      <guid>https://blog.yygz.org/zh/categories/tech/</guid>
-      <description></description>
-    </item>
-    
+    <language>en-us</language><atom:link href="https://blog.yygz.org/zh/categories/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
