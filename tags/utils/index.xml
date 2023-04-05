@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>utils - 标签 - 素问小站</title>
+        <link>https://blog.yygz.org/tags/utils/</link>
+        <description>utils - 标签 - 素问小站</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>zanran2046@gmail.com (素问)</managingEditor>
+            <webMaster>zanran2046@gmail.com (素问)</webMaster><lastBuildDate>Tue, 07 Mar 2023 08:37:14 &#43;0800</lastBuildDate><atom:link href="https://blog.yygz.org/tags/utils/" rel="self" type="application/rss+xml" /><item>
+    <title>个人常用工具集</title>
+    <link>https://blog.yygz.org/2023/03/personal-recommend-utils/</link>
+    <pubDate>Tue, 07 Mar 2023 08:37:14 &#43;0800</pubDate>
+    <author>素问</author>
+    <guid>https://blog.yygz.org/2023/03/personal-recommend-utils/</guid>
+    <description><![CDATA[开发必备工具 VSCode Website: https://code.visualstudio.com/ 简介：This is the only editor which I used for my develop career since vscode released. Visual Studio Code is a lightweight but powerful source code editor which runs on your desktop and is available for Windows, macOS and Linux. It comes with built-in support for JavaScript, TypeScript and Node.js and has a rich ecosystem of extensions for other languages and runtimes (such as C++, C#, Java, Python, PHP, Go, .]]></description>
+</item>
+</channel>
+</rss>

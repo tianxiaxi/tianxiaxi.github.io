@@ -1,0 +1,17 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>clang-format - 标签 - 素问小站</title>
+        <link>https://blog.yygz.org/tags/clang-format/</link>
+        <description>clang-format - 标签 - 素问小站</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>zanran2046@gmail.com (素问)</managingEditor>
+            <webMaster>zanran2046@gmail.com (素问)</webMaster><lastBuildDate>Thu, 09 Mar 2023 08:12:07 &#43;0800</lastBuildDate><atom:link href="https://blog.yygz.org/tags/clang-format/" rel="self" type="application/rss+xml" /><item>
+    <title>Clang format for C/C&#43;&#43;/Java/JavaScript/Object-C</title>
+    <link>https://blog.yygz.org/program/format/clang_format/</link>
+    <pubDate>Thu, 09 Mar 2023 08:12:07 &#43;0800</pubDate>
+    <author>素问</author>
+    <guid>https://blog.yygz.org/program/format/clang_format/</guid>
+    <description><![CDATA[Clang-format简介 clang-format是一个代码格式化的工具，支持C/C++/Java/JavaScript/Objective-C/Protobuf等多种语言，并提供LLVM、Google、Visual Studio（仅VSCode支持）、Chromium、Mozilla、WebKit等多种默认代码规范支持。
+Usage 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 $ clang-format -help OVERVIEW: A tool to format C/C++/Java/JavaScript/Objective-C/Protobuf code.]]></description>
+</item>
+</channel>
+</rss>

@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>mongoose介绍 - 素问小站</title><meta name="Description" content="素问小站 - 记录个人生活与随笔"><meta property="og:title" content="mongoose介绍" />
+<meta property="og:description" content="mongoose介绍 mongoose 是一个标准的 C 语言网络通信模块，是嵌入式网络编程的瑞士军刀。mongoose 提供非阻塞的事件驱动的 TCP, UDP, HTTP, WebSocket, CoAP, MQTT 的服务端与客户端模式的APIs。
+mongoose 主要包含如下功能：
+Cross-platform: works on Linux/UNIX, MacOS, QNX, eCos, Windows, Android, iPhone, FreeRTOS (TI CC3200, ESP8266), etc
+Supported hardware platforms: TI CC3200, TI MSP432, NRF52, STM32, PIC32, ESP8266, ESP32 and more
+Builtin protocols:
+plain TCP, plain UDP, SSL/TLS (over TCP, one-way or two-way)
+HTTP client, HTTP server
+WebSocket client, WebSocket server
+MQTT client, MQTT broker
+CoAP client, CoAP server" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.yygz.org/program/network/mongoose/" /><meta property="og:image" content="https://blog.yygz.org/favicon_io/favicon-32x32.png"/><meta property="article:section" content="program" />
+<meta property="article:published_time" content="2023-03-09T08:51:57+08:00" />
+<meta property="article:modified_time" content="2023-03-09T08:51:57+08:00" /><meta property="og:site_name" content="素问小站" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://blog.yygz.org/favicon_io/favicon-32x32.png"/>
+
+<meta name="twitter:title" content="mongoose介绍"/>
+<meta name="twitter:description" content="mongoose介绍 mongoose 是一个标准的 C 语言网络通信模块，是嵌入式网络编程的瑞士军刀。mongoose 提供非阻塞的事件驱动的 TCP, UDP, HTTP, WebSocket, CoAP, MQTT 的服务端与客户端模式的APIs。
+mongoose 主要包含如下功能：
+Cross-platform: works on Linux/UNIX, MacOS, QNX, eCos, Windows, Android, iPhone, FreeRTOS (TI CC3200, ESP8266), etc
+Supported hardware platforms: TI CC3200, TI MSP432, NRF52, STM32, PIC32, ESP8266, ESP32 and more
+Builtin protocols:
+plain TCP, plain UDP, SSL/TLS (over TCP, one-way or two-way)
+HTTP client, HTTP server
+WebSocket client, WebSocket server
+MQTT client, MQTT broker
+CoAP client, CoAP server"/>
+<meta name="application-name" content="素问小站">
+<meta name="apple-mobile-web-app-title" content="素问小站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon_io/favicon-32x32.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://blog.yygz.org/program/network/mongoose/" /><link rel="prev" href="https://blog.yygz.org/program/frontend/frontend_storage/" /><link rel="next" href="https://blog.yygz.org/program/github/github_repo_compare_appflowy_vsaffine_vslogseq/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "mongoose介绍",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/blog.yygz.org\/program\/network\/mongoose\/"
+        },"image": ["https:\/\/blog.yygz.org\/images\/avatar1.png"],"genre": "program","keywords": "mongoose, 网络通信","wordcount":  707 ,
+        "url": "https:\/\/blog.yygz.org\/program\/network\/mongoose\/","datePublished": "2023-03-09T08:51:57+08:00","dateModified": "2023-03-09T08:51:57+08:00","publisher": {
+            "@type": "Organization",
+            "name": "素问","logo": "https:\/\/blog.yygz.org\/images\/avatar1.png"},"author": {
+                "@type": "Person",
+                "name": "素问"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="auto" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="素问小站"><span class="header-title-pre"><img src="/inspiration.svg" let="素问小站" width="28px" height="28px"></img></span>素问小站</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 类别 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="https://github.com/tianxiaxi" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw' aria-hidden='true'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="素问小站"><span class="header-title-pre"><img src="/inspiration.svg" let="素问小站" width="28px" height="28px"></img></span>素问小站</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">类别</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="https://github.com/tianxiaxi" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw' aria-hidden='true'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="page single special"><h1 class="single-title animate__animated animate__pulse animate__faster">mongoose介绍</h1><div class="content" id="content"><p><a name="ngdkxu"></a></p>
+<h2 id="mongoose介绍">mongoose介绍</h2>
+<p><code>mongoose</code> 是一个标准的 <code>C</code> 语言网络通信模块，是嵌入式网络编程的瑞士军刀。<code>mongoose</code> 提供非阻塞的事件驱动的 <code>TCP, UDP, HTTP, WebSocket, CoAP, MQTT</code> 的服务端与客户端模式的APIs。</p>
+<p><code>mongoose</code> 主要包含如下功能：</p>
+<ul>
+<li>
+<p>Cross-platform: works on Linux/UNIX, MacOS, QNX, eCos, Windows, Android, iPhone, FreeRTOS (TI CC3200, ESP8266), etc</p>
+</li>
+<li>
+<p>Supported hardware platforms: TI CC3200, TI MSP432, NRF52, STM32, PIC32, ESP8266, ESP32 and more</p>
+</li>
+<li>
+<p>Builtin protocols:</p>
+<ul>
+<li>
+<p>plain TCP, plain UDP, SSL/TLS (over TCP, one-way or two-way)</p>
+</li>
+<li>
+<p>HTTP client, HTTP server</p>
+</li>
+<li>
+<p>WebSocket client, WebSocket server</p>
+</li>
+<li>
+<p>MQTT client, MQTT broker</p>
+</li>
+<li>
+<p>CoAP client, CoAP server</p>
+</li>
+<li>
+<p>DNS client, DNS server, async DNS resolver</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Single-threaded, asynchronous, non-blocking core with simple event-based API</p>
+</li>
+<li>
+<p>Native support for <a href="http://www.picotcp.com/" target="_blank" rel="noopener noreffer ">PicoTCP embedded TCP/IP stack</a>, <a href="https://en.wikipedia.org/wiki/LwIP" target="_blank" rel="noopener noreffer ">LWIP embedded TCP/IP stack</a></p>
+</li>
+<li>
+<p>Tiny static and run-time footprint</p>
+</li>
+<li>
+<p>Source code is both ISO C and ISO C++ compliant</p>
+</li>
+<li>
+<p>Very easy to integrate: just copy <a href="https://raw.githubusercontent.com/cesanta/mongoose/master/mongoose.c" target="_blank" rel="noopener noreffer ">mongoose.c</a> and <a href="https://raw.githubusercontent.com/cesanta/mongoose/master/mongoose.h" target="_blank" rel="noopener noreffer ">mongoose.h</a> files to your build tree</p>
+</li>
+</ul>
+<p><a name="zhrhlb"></a></p>
+<h2 id="mongoose使用">mongoose使用</h2>
+<p><code>mongoose</code> 基本数据结构</p>
+<ul>
+<li>
+<p><code>struct mg_mgr</code> 管理所有活动的连接</p>
+</li>
+<li>
+<p><code>struct mg_connection</code> 用于描述和维护一个connection连接</p>
+</li>
+<li>
+<p><code>struct mbuf</code> 管理和维护发送/接收的数据缓冲区</p>
+</li>
+</ul>
+<p><code>mongoose</code> 使用示例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// declare and initialise event manager
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">struct</span> <span class="nc">mg_mgr</span> <span class="n">mgr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">mg_mgr_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">mgr</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Create connections
+</span></span></span><span class="line"><span class="cl"><span class="c1">// For example, a server application should create listening connections
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">struct</span> <span class="nc">mg_connection</span> <span class="o">*</span><span class="n">c</span> <span class="o">=</span> <span class="n">mg_bind</span><span class="p">(</span><span class="o">&amp;</span><span class="n">mgr</span><span class="p">,</span> <span class="s">&#34;80&#34;</span><span class="p">,</span> <span class="n">ev_handler_function</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">mg_set_protocol_http_websocket</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// create an event loop by calling mg_mgr_poll() in a loop
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">for</span> <span class="p">(;;)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="n">mg_mgr_poll</span><span class="p">(</span><span class="o">&amp;</span><span class="n">mgr</span><span class="p">,</span> <span class="mi">1000</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"> <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><a name="p9iews"></a></p>
+<h3 id="memory-buffers">Memory buffers</h3>
+<p>每个connection连接都有一个数据发送缓冲区（<code>struct mg_connection::send_mbuf</code>）与数据接收缓冲区（<code>struct mg_connection::recv_mbuf</code>）。当接收到数据时，<code>mongoose</code>将数据添加到<code>recv_mbuf</code>，并触发<code>recv_mbuf</code> 事件消息；当<code>mongoose</code>发送数据后，将已发送的数据从<code>struct mg_connection::send_mbuf</code> 中抛弃，并触发<code>MG_EV_SEND</code> 事件消息；当connection连接关闭时，将发送<code>MG_EV_CLOSE</code> 事件消息。<br /><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.nlark.com/yuque/0/2018/png/176519/1543373709346-08ee106b-5f6a-4f2e-8191-de16225b7e81.png#width=573"
+        data-srcset="https://cdn.nlark.com/yuque/0/2018/png/176519/1543373709346-08ee106b-5f6a-4f2e-8191-de16225b7e81.png#width=573, https://cdn.nlark.com/yuque/0/2018/png/176519/1543373709346-08ee106b-5f6a-4f2e-8191-de16225b7e81.png#width=573 1.5x, https://cdn.nlark.com/yuque/0/2018/png/176519/1543373709346-08ee106b-5f6a-4f2e-8191-de16225b7e81.png#width=573 2x"
+        data-sizes="auto"
+        alt="https://cdn.nlark.com/yuque/0/2018/png/176519/1543373709346-08ee106b-5f6a-4f2e-8191-de16225b7e81.png#width=573"
+        title="https://cdn.nlark.com/yuque/0/2018/png/176519/1543373709346-08ee106b-5f6a-4f2e-8191-de16225b7e81.png#width=573" />
+<a name="z0xnkp"></a></p>
+<h3 id="event-handler">Event handler</h3>
+<p>Event handler function的处理示例如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">static</span> <span class="kt">void</span> <span class="nf">ev_handler</span><span class="p">(</span><span class="k">struct</span> <span class="nc">ns_connection</span> <span class="o">*</span><span class="n">nc</span><span class="p">,</span> <span class="kt">int</span> <span class="n">ev</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">switch</span> <span class="p">(</span><span class="n">ev</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="nl">NS_ACCEPT</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="nl">NS_CONNECT</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// Do something
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="nl">NS_CLOSE</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// close event
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="nl">NS_RECV</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// data received
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">default</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">      <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>主要参数说明如下：</p>
+<ul>
+<li>
+<p><code>struct mg_connection *nc</code> 收到数据对应的connection</p>
+</li>
+<li>
+<p><code>int ev</code> Event number，请参考《mongoose支持的Event列表》</p>
+</li>
+<li>
+<p><code>void *p</code> 接收到的数据的指针，不同消息该参数有不同的含义</p>
+</li>
+</ul>
+<p>mongoose支持的Event列表：</p>
+<ul>
+<li>
+<p><code>MG_EV_ACCEPT</code>: sent when a new server connection is accepted by a listening connection. <code>void *ev_data</code> is <code>union socket_address</code> of the remote peer.</p>
+</li>
+<li>
+<p><code>MG_EV_CONNECT</code>: sent when a new outbound connection created by <code>mg_connect()</code> either failed or succeeded. <code>void *ev_data</code> is <code>int *success</code>. If <code>success</code> is 0, then the connection has been established, otherwise it contains an error code. See <code>mg_connect_opt()</code> function for code example.</p>
+</li>
+<li>
+<p><code>MG_EV_RECV</code>: New data is received and appended to the end of <code>recv_mbuf</code>. <code>void *ev_data</code> is <code>int *num_received_bytes</code>. Typically, event handler should check received data in <code>nc-&gt;recv_mbuf</code>, discard processed data by calling <code>mbuf_remove()</code>, set connection flags <code>nc-&gt;flags</code> if necessary (see <code>structmg_connection</code>) and write data the remote peer by output functions like <code>mg_send()</code>.<br /><strong>WARNING</strong>: Mongoose uses <code>realloc()</code> to expand the receive buffer. It is the user&rsquo;s responsibility to discard processed data from the beginning of the receive buffer, note the <code>mbuf_remove()</code> call in the example above.</p>
+</li>
+<li>
+<p><code>MG_EV_SEND</code>: Mongoose has written data to the remote peer and discarded written data from the <code>mg_connection::send_mbuf</code>. <code>void *ev_data</code> is <code>int*num_sent_bytes</code>.<br /><strong>NOTE</strong>: Mongoose output functions only append data to the <code>mg_connection::send_mbuf</code>. They do not do any socket writes. An actual IO is done by <code>mg_mgr_poll()</code>. An <code>MG_EV_SEND</code> event is just a notification about an IO has been done.</p>
+</li>
+<li>
+<p><code>MG_EV_POLL</code>: Sent to all connections on each invocation of <code>mg_mgr_poll()</code>. This event could be used to do any housekeeping, for example check whether a certain timeout has expired and closes the connection or send heartbeat message, etc.</p>
+</li>
+<li>
+<p><code>MG_EV_TIMER</code>: Sent to the connection if <code>mg_set_timer()</code> was called.</p>
+</li>
+</ul>
+<p><a name="0czgqb"></a></p>
+<h3 id="connection-address-format">Connection address format</h3>
+<p><code>mongoose</code> 创建conecction连接地址格式如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[PROTO://][HOST:]PORT
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p><code>PROTO</code> 协议名称，如 <code>TCP</code> 、 <code>UDP</code> 等，默认是 <code>TCP</code></p>
+</li>
+<li>
+<p><code>HOST</code> 连接的IPv4/IPv6地址名HOST名称</p>
+</li>
+<li>
+<p><code>PORT</code> 连接的端口号</p>
+</li>
+</ul>
+<p>connection连接地址格式示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">udp://8080
+</span></span><span class="line"><span class="cl">tcp://127.0.0.1:8080
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><a name="wf00gi"></a></p>
+<h3 id="using-ssl-on-tcp">Using SSL on TCP</h3>
+<ul>
+<li>
+<p><code>SSL_CERT</code> PEM format certificate. For listening connections, certificate file must contain private key and server certificate concatenated together; For client connections, it should be a client certificate file.</p>
+</li>
+<li>
+<p><code>CA_CERT</code> PEM format certificate. A certificate authority (CA) PEM file, and it is optional (can be set to NULL). <br />If <code>ca_cert</code> is non-NULL, then the connection is so-called two-way-SSL: other peer&rsquo;s certificate is checked against the <code>ca_cert</code>.</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">struct</span> <span class="nc">mg_mgr</span> <span class="n">mgr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">struct</span> <span class="nc">mg_connection</span> <span class="o">*</span><span class="n">c</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">struct</span> <span class="nc">mg_bind_opts</span> <span class="n">bind_opts</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">mg_mgr_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">mgr</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">memset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bind_opts</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">bind_opts</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">  <span class="n">bind_opts</span><span class="p">.</span><span class="n">ssl_cert</span> <span class="o">=</span> <span class="s">&#34;cert.pem&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">bind_opts</span><span class="p">.</span><span class="n">ssl_key</span> <span class="o">=</span> <span class="s">&#34;key.pem&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Use bind_opts to specify SSL certificate &amp; key file
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">c</span> <span class="o">=</span> <span class="n">mg_bind_opt</span><span class="p">(</span><span class="o">&amp;</span><span class="n">mgr</span><span class="p">,</span> <span class="s">&#34;443&#34;</span><span class="p">,</span> <span class="n">ev_handler</span><span class="p">,</span> <span class="n">bind_opts</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">mg_set_protocol_http_websocket</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="p">...</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>SSL证书生成方式：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># @see: https://www.openssl.org/docs/manmaster/man1/openssl-req.html</span>
+</span></span><span class="line"><span class="cl">openssl req -nodes -x509 -newkey rsa:2048 -keyout key.pem -out cert.pem -days <span class="m">9999</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><a name="3ggrpr"></a></p>
+<h2 id="参考引用">参考引用</h2>
+<ul>
+<li>
+<p><a href="https://github.com/cesanta/mongoose" target="_blank" rel="noopener noreffer ">https://github.com/cesanta/mongoose</a></p>
+</li>
+<li>
+<p><a href="https://cesanta.com/docs/overview/intro.html" target="_blank" rel="noopener noreffer ">https://cesanta.com/docs/overview/intro.html</a></p>
+</li>
+<li>
+<p><a href="https://www.openssl.org/docs/manmaster/man1/openssl-req.html" target="_blank" rel="noopener noreffer ">https://www.openssl.org/docs/manmaster/man1/openssl-req.html</a></p>
+</li>
+</ul>
+</div><div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></div></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.111.3">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11">LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">素问</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://suwen.disqus.com/embed.js" defer></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/twemoji@14.0.2/dist/twemoji.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":30,"type":"lunr"},"twemoji":true};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

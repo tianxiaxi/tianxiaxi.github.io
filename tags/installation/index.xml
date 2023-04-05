@@ -1,0 +1,8 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>安装 - 标签 - 素问小站</title>
+        <link>https://blog.yygz.org/tags/installation/</link>
+        <description>安装 - 标签 - 素问小站</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>zanran2046@gmail.com (素问)</managingEditor>
+            <webMaster>zanran2046@gmail.com (素问)</webMaster><atom:link href="https://blog.yygz.org/tags/installation/" rel="self" type="application/rss+xml" /></channel>
+</rss>

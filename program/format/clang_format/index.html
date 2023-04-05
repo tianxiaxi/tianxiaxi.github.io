@@ -1,0 +1,1653 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Clang format for C/C&#43;&#43;/Java/JavaScript/Object-C - 素问小站</title><meta name="Description" content="素问小站 - 记录个人生活与随笔"><meta property="og:title" content="Clang format for C/C&#43;&#43;/Java/JavaScript/Object-C" />
+<meta property="og:description" content="Clang-format简介 clang-format是一个代码格式化的工具，支持C/C&#43;&#43;/Java/JavaScript/Objective-C/Protobuf等多种语言，并提供LLVM、Google、Visual Studio（仅VSCode支持）、Chromium、Mozilla、WebKit等多种默认代码规范支持。
+Usage 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 $ clang-format -help OVERVIEW: A tool to format C/C&#43;&#43;/Java/JavaScript/Objective-C/Protobuf code." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.yygz.org/program/format/clang_format/" /><meta property="og:image" content="https://blog.yygz.org/favicon_io/favicon-32x32.png"/><meta property="article:section" content="program" />
+<meta property="article:published_time" content="2023-03-09T08:12:07+08:00" />
+<meta property="article:modified_time" content="2023-03-09T08:12:07+08:00" /><meta property="og:site_name" content="素问小站" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://blog.yygz.org/favicon_io/favicon-32x32.png"/>
+
+<meta name="twitter:title" content="Clang format for C/C&#43;&#43;/Java/JavaScript/Object-C"/>
+<meta name="twitter:description" content="Clang-format简介 clang-format是一个代码格式化的工具，支持C/C&#43;&#43;/Java/JavaScript/Objective-C/Protobuf等多种语言，并提供LLVM、Google、Visual Studio（仅VSCode支持）、Chromium、Mozilla、WebKit等多种默认代码规范支持。
+Usage 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 $ clang-format -help OVERVIEW: A tool to format C/C&#43;&#43;/Java/JavaScript/Objective-C/Protobuf code."/>
+<meta name="application-name" content="素问小站">
+<meta name="apple-mobile-web-app-title" content="素问小站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon_io/favicon-32x32.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://blog.yygz.org/program/format/clang_format/" /><link rel="next" href="https://blog.yygz.org/program/frontend/frontend_storage/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Clang format for C/C++/Java/JavaScript/Object-C",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/blog.yygz.org\/program\/format\/clang_format\/"
+        },"image": ["https:\/\/blog.yygz.org\/images\/avatar1.png"],"genre": "program","keywords": "代码格式化, clang-format","wordcount":  2477 ,
+        "url": "https:\/\/blog.yygz.org\/program\/format\/clang_format\/","datePublished": "2023-03-09T08:12:07+08:00","dateModified": "2023-03-09T08:12:07+08:00","publisher": {
+            "@type": "Organization",
+            "name": "素问","logo": "https:\/\/blog.yygz.org\/images\/avatar1.png"},"author": {
+                "@type": "Person",
+                "name": "素问"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="auto" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="素问小站"><span class="header-title-pre"><img src="/inspiration.svg" let="素问小站" width="28px" height="28px"></img></span>素问小站</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 类别 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="https://github.com/tianxiaxi" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw' aria-hidden='true'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="素问小站"><span class="header-title-pre"><img src="/inspiration.svg" let="素问小站" width="28px" height="28px"></img></span>素问小站</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">类别</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="https://github.com/tianxiaxi" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw' aria-hidden='true'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="page single special"><h1 class="single-title animate__animated animate__pulse animate__faster">Clang format for C/C&#43;&#43;/Java/JavaScript/Object-C</h1><div class="content" id="content"><p><a name="nhy9fv"></a></p>
+<h1 id="clang-format简介">Clang-format简介</h1>
+<p>clang-format是一个代码格式化的工具，支持C/C++/Java/JavaScript/Objective-C/Protobuf等多种语言，并提供<a href="http://llvm.org/docs/CodingStandards.html" target="_blank" rel="noopener noreffer ">LLVM</a>、<a href="http://google-styleguide.googlecode.com/svn/trunk/cppguide.xml" target="_blank" rel="noopener noreffer ">Google</a>、<a href="https://code.visualstudio.com/docs/languages/cpp" target="_blank" rel="noopener noreffer ">Visual Studio</a>（仅VSCode支持）、<a href="http://www.chromium.org/developers/coding-style" target="_blank" rel="noopener noreffer ">Chromium</a>、<a href="https://developer.mozilla.org/en-US/docs/Developer_Guide/Coding_Style" target="_blank" rel="noopener noreffer ">Mozilla</a>、<a href="http://www.webkit.org/coding/coding-style.html" target="_blank" rel="noopener noreffer ">WebKit</a>等多种默认代码规范支持。</p>
+<p><a name="e0lebo"></a></p>
+<h2 id="usage">Usage</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ clang-format -help
+</span></span><span class="line"><span class="cl">OVERVIEW: A tool to format C/C++/Java/JavaScript/Objective-C/Protobuf code.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">If no arguments are specified, it formats the code from standard input
+</span></span><span class="line"><span class="cl">and writes the result to the standard output.
+</span></span><span class="line"><span class="cl">If &lt;file&gt;s are given, it reformats the files. If -i is specified
+</span></span><span class="line"><span class="cl">together with &lt;file&gt;s, the files are edited in-place. Otherwise, the
+</span></span><span class="line"><span class="cl">result is written to the standard output.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">USAGE: clang-format <span class="o">[</span>options<span class="o">]</span> <span class="o">[</span>&lt;file&gt; ...<span class="o">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">OPTIONS:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Clang-format options:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  -assume-filename<span class="o">=</span>&lt;string&gt; - When reading from stdin, clang-format assumes this
+</span></span><span class="line"><span class="cl">                              filename to look <span class="k">for</span> a style config file <span class="o">(</span>with
+</span></span><span class="line"><span class="cl">                              -style<span class="o">=</span>file<span class="o">)</span> and to determine the language.
+</span></span><span class="line"><span class="cl">  -cursor<span class="o">=</span>&lt;uint&gt;            - The position of the cursor when invoking
+</span></span><span class="line"><span class="cl">                              clang-format from an editor integration
+</span></span><span class="line"><span class="cl">  -dump-config              - Dump configuration options to stdout and exit.
+</span></span><span class="line"><span class="cl">                              Can be used with -style option.
+</span></span><span class="line"><span class="cl">  -fallback-style<span class="o">=</span>&lt;string&gt;  - The name of the predefined style used as a
+</span></span><span class="line"><span class="cl">                              fallback in <span class="k">case</span> clang-format is invoked with
+</span></span><span class="line"><span class="cl">                              -style<span class="o">=</span>file, but can not find the .clang-format
+</span></span><span class="line"><span class="cl">                              file to use.
+</span></span><span class="line"><span class="cl">                              Use -fallback-style<span class="o">=</span>none to skip formatting.
+</span></span><span class="line"><span class="cl">  -i                        - Inplace edit &lt;file&gt;s, <span class="k">if</span> specified.
+</span></span><span class="line"><span class="cl">  -length<span class="o">=</span>&lt;uint&gt;            - Format a range of this length <span class="o">(</span>in bytes<span class="o">)</span>.
+</span></span><span class="line"><span class="cl">                              Multiple ranges can be formatted by specifying
+</span></span><span class="line"><span class="cl">                              several -offset and -length pairs.
+</span></span><span class="line"><span class="cl">                              When only a single -offset is specified without
+</span></span><span class="line"><span class="cl">                              -length, clang-format will format up to the end
+</span></span><span class="line"><span class="cl">                              of the file.
+</span></span><span class="line"><span class="cl">                              Can only be used with one input file.
+</span></span><span class="line"><span class="cl">  -lines<span class="o">=</span>&lt;string&gt;           - &lt;start line&gt;:&lt;end line&gt; - format a range of
+</span></span><span class="line"><span class="cl">                              lines <span class="o">(</span>both 1-based<span class="o">)</span>.
+</span></span><span class="line"><span class="cl">                              Multiple ranges can be formatted by specifying
+</span></span><span class="line"><span class="cl">                              several -lines arguments.
+</span></span><span class="line"><span class="cl">                              Can<span class="err">&#39;</span>t be used with -offset and -length.
+</span></span><span class="line"><span class="cl">                              Can only be used with one input file.
+</span></span><span class="line"><span class="cl">  -offset<span class="o">=</span>&lt;uint&gt;            - Format a range starting at this byte offset.
+</span></span><span class="line"><span class="cl">                              Multiple ranges can be formatted by specifying
+</span></span><span class="line"><span class="cl">                              several -offset and -length pairs.
+</span></span><span class="line"><span class="cl">                              Can only be used with one input file.
+</span></span><span class="line"><span class="cl">  -output-replacements-xml  - Output replacements as XML.
+</span></span><span class="line"><span class="cl">  -sort-includes            - Sort touched include lines
+</span></span><span class="line"><span class="cl">  -style<span class="o">=</span>&lt;string&gt;           - Coding style, currently supports:
+</span></span><span class="line"><span class="cl">                                LLVM, Google, Chromium, Mozilla, WebKit.
+</span></span><span class="line"><span class="cl">                              Use -style<span class="o">=</span>file to load style configuration from
+</span></span><span class="line"><span class="cl">                              .clang-format file located in one of the parent
+</span></span><span class="line"><span class="cl">                              directories of the <span class="nb">source</span> file <span class="o">(</span>or current
+</span></span><span class="line"><span class="cl">                              directory <span class="k">for</span> stdin<span class="o">)</span>.
+</span></span><span class="line"><span class="cl">                              Use -style<span class="o">=</span><span class="s2">&#34;{key: value, ...}&#34;</span> to <span class="nb">set</span> specific
+</span></span><span class="line"><span class="cl">                              parameters, e.g.:
+</span></span><span class="line"><span class="cl">                                -style<span class="o">=</span><span class="s2">&#34;{BasedOnStyle: llvm, IndentWidth: 8}&#34;</span>
+</span></span><span class="line"><span class="cl">  -verbose                  - If set, shows the list of processed files
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Generic Options:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  -help                     - Display available options <span class="o">(</span>-help-hidden <span class="k">for</span> more<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  -help-list                - Display list of available options <span class="o">(</span>-help-list-hidden <span class="k">for</span> more<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  -version                  - Display the version of this program
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>创建.clang-format文件</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">clang-format -style<span class="o">=</span>google -dump-config &gt; .clang-format
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><a name="fqfwgw"></a></p>
+<h2 id="clang-format配置介绍">Clang-Format配置介绍</h2>
+<p>Clang-Format 可以通过 -style=&quot;{key: value, &hellip;}&quot; 直接指定命令行参数的配置，也可以通过 -style=file 指定代码格式化配置文件；也可以从工作目录中读取<code>.clang-format</code> 或 <code>_clang-format</code>代码格式化配置文件。</p>
+<p><code>.clang-format</code>是一个YAML格式的配置文件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">key1</span><span class="p">:</span><span class="w"> </span><span class="l">value1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">key2</span><span class="p">:</span><span class="w"> </span><span class="l">value2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># A comment.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nn">...</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>.clang-format</code>文件可以同时配置多种语言的格式化配置参数，文件前面未指定的配置项为默认配置项，对所有语言都有效，但指定语言下相同的配置项将覆盖默认的配置项。clang-format工具可以自动识别代码文件的语言类型，也可以通过-assume-filename=指定语言。多语言的配置文件示例如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># We&#39;ll use defaults from the LLVM style, but with 4 columns indentation.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">BasedOnStyle</span><span class="p">:</span><span class="w"> </span><span class="l">LLVM</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">IndentWidth</span><span class="p">:</span><span class="w"> </span><span class="m">4</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">Language</span><span class="p">:</span><span class="w"> </span><span class="l">Cpp</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Force pointers to the type for C++.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">DerivePointerAlignment</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">PointerAlignment</span><span class="p">:</span><span class="w"> </span><span class="l">Left</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">Language</span><span class="p">:</span><span class="w"> </span><span class="l">JavaScript</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Use 100 columns for JS.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">ColumnLimit</span><span class="p">:</span><span class="w"> </span><span class="m">100</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">Language</span><span class="p">:</span><span class="w"> </span><span class="l">Proto</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Don&#39;t format .proto files.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">DisableFormat</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nn">...</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>当不期望clang-format格式化某一段代码时，可以采用下面的注释：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">formatted_code</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// clang-format off
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">void</span>    <span class="n">unformatted_code</span>  <span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// clang-format on
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="n">formatted_code_again</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>注：</strong></p>
+<ul>
+<li>
+<p><code>// clang-format on</code> or <code>/* clang-format on */</code>等效</p>
+</li>
+<li>
+<p><code>// clang-format off</code> or <code>/* clang-format off */</code>等效</p>
+</li>
+</ul>
+<p><a name="eqwgsn"></a></p>
+<h3 id="clang-format-可选配置列表-常用">Clang-Format 可选配置列表 (常用)</h3>
+<ul>
+<li><strong>BasedOnStyle</strong>_ (string）_</li>
+</ul>
+<blockquote>
+<p>指定标准的基础代码规范式样，取值包括 <a href="http://llvm.org/docs/CodingStandards.html" target="_blank" rel="noopener noreffer ">LLVM</a>、<a href="http://google-styleguide.googlecode.com/svn/trunk/cppguide.xml" target="_blank" rel="noopener noreffer ">Google</a>、<a href="http://www.chromium.org/developers/coding-style" target="_blank" rel="noopener noreffer ">Chromium</a>、<a href="https://developer.mozilla.org/en-US/docs/Developer_Guide/Coding_Style" target="_blank" rel="noopener noreffer ">Mozilla</a>、<a href="http://www.webkit.org/coding/coding-style.html" target="_blank" rel="noopener noreffer ">WebKit</a>等</p>
+</blockquote>
+<ul>
+<li><strong>AccessModifierOffset</strong>_ (int)_</li>
+</ul>
+<blockquote>
+<p>访问权限关键字的缩进，如public</p>
+</blockquote>
+<ul>
+<li><strong>AlignAfterOpenBracket</strong></li>
+</ul>
+<blockquote>
+<p>括号中的参数是否需要对齐</p>
+</blockquote>
+<ul>
+<li>**AlignConsecutiveAssignments **<em>(bool)</em></li>
+</ul>
+<blockquote>
+<p>赋值操作时是否需要对齐，如当设置为true时，</p>
+</blockquote>
+<blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"></code></pre></td></tr></table>
+</div>
+</div></blockquote>
+<p>int aaaa = 12;
+int b    = 23;
+int ccc  = 23;</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">- **AlignConsecutiveDeclarations **_(bool)_
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&gt; 变量声明时是否需要对齐，如当设置为true时
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&gt; ```cpp
+</span></span><span class="line"><span class="cl">int         aaaa = 12;
+</span></span><span class="line"><span class="cl">float       b = 23;
+</span></span><span class="line"><span class="cl">std::string ccc = 23;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>AlignEscapedNewlines</strong></li>
+</ul>
+<blockquote>
+<p>使用backslashes()换行时()的设置方式，包括不对齐、左对齐、右对齐</p>
+</blockquote>
+<ul>
+<li>**AlignOperands **<em>(bool)</em></li>
+</ul>
+<blockquote>
+<p>表达式或者语句拆分为多行时的是否需要对齐</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"></code></pre></td></tr></table>
+</div>
+</div></blockquote>
+<p>int aaa = bbbbbbbbbbbbbbb +
+ccccccccccccccc;</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">- **AlignTrailingComments **_(bool)_
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&gt; 注释是否需要对齐
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">- **AllowAllParametersOfDeclarationOnNextLine **_(bool)_
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&gt; 如何函数声明时包含多行，每个参数是否需要单独列一行
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">- **AllowShortBlocksOnASingleLine **_(bool)_
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&gt; 简单语句是否需要写在一行。 E.g., this allows `if (a) { return; }` to be put on a single line.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">- **AllowShortCaseLabelsOnASingleLine **_(bool)_
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&gt; case标签是否需要保持在一行
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">```cpp
+</span></span><span class="line"><span class="cl">// true:                                // false:
+</span></span><span class="line"><span class="cl">switch (a) {                    vs.     switch (a) {
+</span></span><span class="line"><span class="cl">case 1: x = 1; break;                   case 1:
+</span></span><span class="line"><span class="cl">case 2: return;                           x = 1;
+</span></span><span class="line"><span class="cl">}                                         break;
+</span></span><span class="line"><span class="cl">                                        case 2:
+</span></span><span class="line"><span class="cl">                                          return;
+</span></span><span class="line"><span class="cl">                                        }
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>AllowShortFunctionsOnASingleLine</strong></li>
+</ul>
+<blockquote>
+<p>短函数是否可以保持在一行</p>
+</blockquote>
+<ul>
+<li>**AllowShortIfStatementsOnASingleLine **<em>(bool)</em></li>
+</ul>
+<blockquote>
+<p>简单 if 语句是否可以保持在一行</p>
+</blockquote>
+<ul>
+<li>**AllowShortLoopsOnASingleLine **<em>(bool)</em></li>
+</ul>
+<blockquote>
+<p>简单循环语句是否可以保持在一行</p>
+</blockquote>
+<ul>
+<li><strong>AlwaysBreakAfterReturnType</strong></li>
+</ul>
+<blockquote>
+<p>数据返回值的可选格式</p>
+</blockquote>
+<ul>
+<li><strong>AlwaysBreakTemplateDeclarations</strong></li>
+</ul>
+<blockquote>
+<p>模板声明时的换行式样</p>
+</blockquote>
+<ul>
+<li>**BinPackArguments **<em>(bool)</em></li>
+</ul>
+<blockquote>
+<p>函数调用时参数放在一行还是每个参数一行</p>
+</blockquote>
+<ul>
+<li>**BinPackParameters **<em>(bool)</em></li>
+</ul>
+<blockquote>
+<p>函数声明或定义时参数放在一行还是每个参数一行</p>
+</blockquote>
+<ul>
+<li><strong>BraceWrapping / BreakBeforeBraces</strong></li>
+</ul>
+<blockquote>
+<p>大括号的使用方式</p>
+</blockquote>
+<ul>
+<li>**BreakBeforeTernaryOperators **<em>(bool)</em></li>
+</ul>
+<blockquote>
+<p>三元操作符时是否需要换行</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="nb">true</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl"><span class="n">veryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongDescription</span>
+</span></span><span class="line"><span class="cl">    <span class="o">?</span> <span class="nl">firstValue</span>
+</span></span><span class="line"><span class="cl">    <span class="p">:</span> <span class="n">SecondValueVeryVeryVeryVeryLong</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">false</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl"><span class="n">veryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongDescription</span> <span class="o">?</span>
+</span></span><span class="line"><span class="cl">    <span class="nl">firstValue</span> <span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">SecondValueVeryVeryVeryVeryLong</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>BreakConstructorInitializers</strong></li>
+</ul>
+<blockquote>
+<p>构造函数成员初始化列表的的式样配置</p>
+</blockquote>
+<ul>
+<li><strong>BreakInheritanceList</strong></li>
+</ul>
+<blockquote>
+<p>类多重继承时父类的式样配置</p>
+</blockquote>
+<ul>
+<li>**BreakStringLiterals **<em>(bool)</em></li>
+</ul>
+<blockquote>
+<p>是否允许对字符串进行格式化</p>
+</blockquote>
+<ul>
+<li>**ColumnLimit **<em>(unsigned)</em></li>
+</ul>
+<blockquote>
+<p>The column limit.</p>
+<p>A column limit of <code>0</code> means that there is no column limit. In this case, clang-format will respect the input’s line breaking decisions within statements unless they contradict other rules.</p>
+</blockquote>
+<ul>
+<li>**CompactNamespaces **<em>(bool)</em></li>
+</ul>
+<blockquote>
+<p>是否允许namespace打包到一行，或者每个namespace分行</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="nb">true</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl"><span class="k">namespace</span> <span class="n">Foo</span> <span class="p">{</span> <span class="k">namespace</span> <span class="n">Bar</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="p">}}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">false</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl"><span class="k">namespace</span> <span class="n">Foo</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">namespace</span> <span class="n">Bar</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>ConstructorInitializerAllOnOneLineOrOnePerLine</strong></li>
+</ul>
+<blockquote>
+<p>If the constructor initializers don’t fit on a line, put each initializer on its own line.</p>
+</blockquote>
+<ul>
+<li><strong>ConstructorInitializerIndentWidth</strong> (<code>unsigned</code>)</li>
+</ul>
+<blockquote>
+<p>构造函数成员初始化列表的缩进数量</p>
+</blockquote>
+<ul>
+<li><strong>ContinuationIndentWidth</strong> (<code>unsigned</code>)</li>
+</ul>
+<blockquote>
+<p>行缩进数量</p>
+</blockquote>
+<ul>
+<li><strong>Cpp11BracedListStyle</strong> (<code>bool</code>)</li>
+</ul>
+<blockquote>
+<p>If <code>true</code>, format braced lists as best suited for C++11 braced lists.</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="nb">true</span><span class="o">:</span>                                  <span class="nb">false</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">x</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">};</span>     <span class="n">vs</span><span class="p">.</span>     <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">x</span><span class="p">{</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">x</span><span class="p">{{},</span> <span class="p">{},</span> <span class="p">{},</span> <span class="p">{}};</span>           <span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">x</span><span class="p">{</span> <span class="p">{},</span> <span class="p">{},</span> <span class="p">{},</span> <span class="p">{}</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="n">f</span><span class="p">(</span><span class="n">MyMap</span><span class="p">[{</span><span class="n">composite</span><span class="p">,</span> <span class="n">key</span><span class="p">}]);</span>            <span class="n">f</span><span class="p">(</span><span class="n">MyMap</span><span class="p">[{</span> <span class="n">composite</span><span class="p">,</span> <span class="n">key</span> <span class="p">}]);</span>
+</span></span><span class="line"><span class="cl"><span class="k">new</span> <span class="kt">int</span><span class="p">[</span><span class="mi">3</span><span class="p">]{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">};</span>                   <span class="k">new</span> <span class="kt">int</span><span class="p">[</span><span class="mi">3</span><span class="p">]{</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span> <span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>DerivePointerAlignment</strong> (<code>bool</code>)</li>
+</ul>
+<blockquote>
+<p><code>&amp;</code> and <code>*</code>的对齐方式</p>
+</blockquote>
+<ul>
+<li><strong>DisableFormat</strong> (<code>bool</code>)</li>
+</ul>
+<blockquote>
+<p>是否禁止代码格式化</p>
+</blockquote>
+<ul>
+<li><strong>FixNamespaceComments</strong> (<code>bool</code>)</li>
+</ul>
+<blockquote>
+<p>是否自动添加namespace的结束注释</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="nb">true</span><span class="o">:</span>                                  <span class="nb">false</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl"><span class="k">namespace</span> <span class="n">a</span> <span class="p">{</span>                  <span class="n">vs</span><span class="p">.</span>     <span class="k">namespace</span> <span class="n">a</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="n">foo</span><span class="p">();</span>                                 <span class="n">foo</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c1">// namespace a;                      }
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>IncludeBlocks</strong> (<code>IncludeBlocksStyle</code>)</li>
+</ul>
+<blockquote>
+<p>Dependent on the value, multiple <code>#include</code> blocks can be sorted as one and divided based on category.</p>
+</blockquote>
+<ul>
+<li><strong>IndentCaseLabels</strong> (<code>bool</code>)</li>
+</ul>
+<blockquote>
+<p>case 语句是否需要缩进</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="nb">false</span><span class="o">:</span>                                 <span class="nb">true</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl"><span class="k">switch</span> <span class="p">(</span><span class="n">fool</span><span class="p">)</span> <span class="p">{</span>                <span class="n">vs</span><span class="p">.</span>     <span class="k">switch</span> <span class="p">(</span><span class="n">fool</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">case</span> <span class="mi">1</span><span class="o">:</span>                                  <span class="k">case</span> <span class="mi">1</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">bar</span><span class="p">();</span>                                   <span class="n">bar</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="k">break</span><span class="p">;</span>                                   <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">default</span><span class="o">:</span>                                 <span class="k">default</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">plop</span><span class="p">();</span>                                  <span class="n">plop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>                                      <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>IndentPPDirectives</strong> (<code>PPDirectiveIndentStyle</code>)</li>
+</ul>
+<blockquote>
+<p>预处理指令或宏的缩进方式</p>
+</blockquote>
+<ul>
+<li><strong>IndentWidth</strong> (<code>unsigned</code>)</li>
+</ul>
+<blockquote>
+<p>行缩进的字符数量</p>
+</blockquote>
+<ul>
+<li><strong>KeepEmptyLinesAtTheStartOfBlocks</strong> (<code>bool</code>)</li>
+</ul>
+<blockquote>
+<p>是否需要在代码段前保持空行</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="nb">true</span><span class="o">:</span>                                  <span class="nb">false</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">foo</span><span class="p">)</span> <span class="p">{</span>                     <span class="n">vs</span><span class="p">.</span>     <span class="k">if</span> <span class="p">(</span><span class="n">foo</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                                         <span class="n">bar</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="n">bar</span><span class="p">();</span>                               <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>Language</strong> (<code>LanguageKind</code>)</li>
+</ul>
+<blockquote>
+<p>指定语言类型</p>
+</blockquote>
+<ul>
+<li>
+<p><code>LK_None</code> (in configuration: <code>None</code>) Do not use.</p>
+</li>
+<li>
+<p><code>LK_Cpp</code> (in configuration: <code>Cpp</code>) Should be used for C, C++.</p>
+</li>
+<li>
+<p><code>LK_Java</code> (in configuration: <code>Java</code>) Should be used for Java.</p>
+</li>
+<li>
+<p><code>LK_JavaScript</code> (in configuration: <code>JavaScript</code>) Should be used for JavaScript.</p>
+</li>
+<li>
+<p><code>LK_ObjC</code> (in configuration: <code>ObjC</code>) Should be used for Objective-C, Objective-C++.</p>
+</li>
+<li>
+<p><code>LK_Proto</code> (in configuration: <code>Proto</code>) Should be used for Protocol Buffers (<a href="https://developers.google.com/protocol-buffers/" target="_blank" rel="noopener noreffer ">https://developers.google.com/protocol-buffers/</a>).</p>
+</li>
+<li>
+<p><code>LK_TableGen</code> (in configuration: <code>TableGen</code>) Should be used for TableGen code.</p>
+</li>
+<li>
+<p><code>LK_TextProto</code> (in configuration: <code>TextProto</code>) Should be used for Protocol Buffer messages in text format (<a href="https://developers.google.com/protocol-buffers/" target="_blank" rel="noopener noreffer ">https://developers.google.com/protocol-buffers/</a>).</p>
+</li>
+<li>
+<p><strong>MaxEmptyLinesToKeep</strong> (<code>unsigned</code>)</p>
+</li>
+</ul>
+<blockquote>
+<p>The maximum number of consecutive empty lines to keep.</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="nl">MaxEmptyLinesToKeep</span><span class="p">:</span> <span class="mi">1</span>         <span class="n">vs</span><span class="p">.</span>     <span class="nl">MaxEmptyLinesToKeep</span><span class="p">:</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">f</span><span class="p">()</span> <span class="p">{</span>                              <span class="kt">int</span> <span class="nf">f</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>                                 <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                                           <span class="n">i</span> <span class="o">=</span> <span class="n">foo</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="n">i</span> <span class="o">=</span> <span class="n">foo</span><span class="p">();</span>                               <span class="k">return</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                                       <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>NamespaceIndentation</strong> (<code>NamespaceIndentationKind</code>)</li>
+</ul>
+<blockquote>
+<p>namespace 的缩进方式</p>
+</blockquote>
+<ul>
+<li><strong>PointerAlignment</strong> (<code>PointerAlignmentStyle</code>)</li>
+</ul>
+<blockquote>
+<p>指针与引用的对齐方式</p>
+</blockquote>
+<ul>
+<li><strong>ReflowComments</strong> (<code>bool</code>)</li>
+</ul>
+<blockquote>
+<p>If <code>true</code>, clang-format will attempt to re-flow comments.</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="nb">false</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// veryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongComment with plenty of information
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cm">/* second veryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongComment with plenty of information */</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">true</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// veryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongComment with plenty of
+</span></span></span><span class="line"><span class="cl"><span class="c1">// information
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cm">/* second veryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongComment with plenty of
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * information */</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>SortIncludes</strong> (<code>bool</code>)</li>
+</ul>
+<blockquote>
+<p>是否对 #include 的头文件进行排序</p>
+</blockquote>
+<ul>
+<li><strong>SortUsingDeclarations</strong> (<code>bool</code>)</li>
+</ul>
+<blockquote>
+<p>是否对声明进行排序</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="nb">false</span><span class="o">:</span>                                 <span class="nb">true</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="p">;</span>               <span class="n">vs</span><span class="p">.</span>     <span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">cin</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">cin</span><span class="p">;</span>                        <span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>SpaceAfterCStyleCast</strong> (<code>bool</code>)</li>
+</ul>
+<blockquote>
+<p>是否对 C 语言风格的类型转换添加空格</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="nb">true</span><span class="o">:</span>                                  <span class="nb">false</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="n">i</span><span class="p">;</span>                       <span class="n">vs</span><span class="p">.</span>     <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">i</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>SpaceAfterTemplateKeyword</strong> (<code>bool</code>)</li>
+</ul>
+<blockquote>
+<p>template 关键字后是否需要添加空格</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="nb">true</span><span class="o">:</span>                                  <span class="nb">false</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl"><span class="k">template</span> <span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="kt">void</span> <span class="n">foo</span><span class="p">();</span>     <span class="n">vs</span><span class="p">.</span>     <span class="k">template</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="kt">void</span> <span class="n">foo</span><span class="p">();</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>SpaceBeforeAssignmentOperators</strong> (<code>bool</code>)</li>
+</ul>
+<blockquote>
+<p>赋值操作符前是否需要添加空格</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="nb">true</span><span class="o">:</span>                                  <span class="nb">false</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>                     <span class="n">vs</span><span class="p">.</span>     <span class="kt">int</span> <span class="n">a</span><span class="o">=</span><span class="mi">5</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">a</span> <span class="o">+=</span> <span class="mi">42</span>                                <span class="n">a</span><span class="o">+=</span><span class="mi">42</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>SpaceBeforeCpp11BracedList</strong> (<code>bool</code>)</li>
+</ul>
+<blockquote>
+<p>C11风格的对象初始化时是否需要添加空格</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="nb">true</span><span class="o">:</span>                                  <span class="nb">false</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl"><span class="n">Foo</span> <span class="n">foo</span> <span class="p">{</span> <span class="n">bar</span> <span class="p">};</span>               <span class="n">vs</span><span class="p">.</span>     <span class="n">Foo</span> <span class="n">foo</span><span class="p">{</span> <span class="n">bar</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="n">Foo</span> <span class="p">{};</span>                                <span class="n">Foo</span><span class="p">{};</span>
+</span></span><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="p">{</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span> <span class="p">};</span>               <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">{</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="k">new</span> <span class="kt">int</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="p">{</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span> <span class="p">};</span>                <span class="k">new</span> <span class="kt">int</span><span class="p">[</span><span class="mi">3</span><span class="p">]{</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span> <span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>SpaceBeforeCtorInitializerColon</strong> (<code>bool</code>)</li>
+</ul>
+<blockquote>
+<p>构造函数成员初始化列表的冒号(:)前是否需要添加空格</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="nb">true</span><span class="o">:</span>                                  <span class="nb">false</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl"><span class="n">Foo</span><span class="o">::</span><span class="n">Foo</span><span class="p">()</span> <span class="o">:</span> <span class="n">a</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="p">{}</span>                   <span class="n">Foo</span><span class="o">::</span><span class="n">Foo</span><span class="p">()</span><span class="o">:</span> <span class="n">a</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="p">{}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>SpaceBeforeInheritanceColon</strong> (<code>bool</code>)</li>
+</ul>
+<blockquote>
+<p>类继承时是否需要在冒号(:)前添加括号</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="nb">true</span><span class="o">:</span>                                  <span class="nb">false</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Foo</span> <span class="o">:</span> <span class="n">Bar</span> <span class="p">{}</span>             <span class="n">vs</span><span class="p">.</span>     <span class="k">class</span> <span class="nc">Foo</span><span class="o">:</span> <span class="n">Bar</span> <span class="p">{}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>SpaceBeforeParens</strong> (<code>SpaceBeforeParensOptions</code>)</li>
+</ul>
+<blockquote>
+<p>括号前后的空格处理</p>
+</blockquote>
+<ul>
+<li><strong>SpaceBeforeRangeBasedForLoopColon</strong> (<code>bool</code>)</li>
+</ul>
+<blockquote>
+<p>If <code>false</code>, spaces will be removed before range-based for loop colon.</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="nb">true</span><span class="o">:</span>                                  <span class="nb">false</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">v</span> <span class="p">:</span> <span class="n">values</span><span class="p">)</span> <span class="p">{}</span>       <span class="n">vs</span><span class="p">.</span>     <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">v</span><span class="p">:</span> <span class="n">values</span><span class="p">)</span> <span class="p">{}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>SpaceInEmptyParentheses</strong> (<code>bool</code>)</li>
+</ul>
+<blockquote>
+<p>空括号（）中是否需要添加空格</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="nb">true</span><span class="o">:</span>                                <span class="nb">false</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">f</span><span class="p">(</span> <span class="p">)</span> <span class="p">{</span>                    <span class="n">vs</span><span class="p">.</span>   <span class="kt">void</span> <span class="n">f</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">x</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="n">foo</span><span class="p">(</span> <span class="p">),</span> <span class="n">bar</span><span class="p">(</span> <span class="p">)};</span>          <span class="kt">int</span> <span class="n">x</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="n">foo</span><span class="p">(),</span> <span class="n">bar</span><span class="p">()};</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nb">true</span><span class="p">)</span> <span class="p">{</span>                          <span class="k">if</span> <span class="p">(</span><span class="nb">true</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">f</span><span class="p">(</span> <span class="p">);</span>                                <span class="n">f</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>                                    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>                                    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>SpacesBeforeTrailingComments</strong> (<code>unsigned</code>)</li>
+</ul>
+<blockquote>
+<p>注释代码前需要添加的空格数量</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="nl">SpacesBeforeTrailingComments</span><span class="p">:</span> <span class="mi">3</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">f</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nb">true</span><span class="p">)</span> <span class="p">{</span>   <span class="c1">// foo1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">f</span><span class="p">();</span>        <span class="c1">// bar
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span>             <span class="c1">// foo
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>SpacesInAngles</strong> (<code>bool</code>)</li>
+</ul>
+<blockquote>
+<p>&lt;&gt; 中是否要使用空格</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="nb">true</span><span class="o">:</span>                                  <span class="nb">false</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl"><span class="k">static_cast</span><span class="o">&lt;</span> <span class="kt">int</span> <span class="o">&gt;</span><span class="p">(</span><span class="n">arg</span><span class="p">);</span>       <span class="n">vs</span><span class="p">.</span>     <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">arg</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span> <span class="kt">void</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">fct</span><span class="p">;</span>        <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">fct</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>SpacesInCStyleCastParentheses</strong> (<code>bool</code>)</li>
+</ul>
+<blockquote>
+<p>C语言风格的类型转换时是否需要在括号中添加空格</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="nb">true</span><span class="o">:</span>                                  <span class="nb">false</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl"><span class="n">x</span> <span class="o">=</span> <span class="p">(</span> <span class="n">int32</span> <span class="p">)</span><span class="n">y</span>                 <span class="n">vs</span><span class="p">.</span>     <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">int32</span><span class="p">)</span><span class="n">y</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>SpacesInContainerLiterals</strong> (<code>bool</code>)</li>
+</ul>
+<blockquote>
+<p>容器列表中的空格</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="nb">true</span><span class="o">:</span>                                  <span class="nb">false</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl"><span class="n">var</span> <span class="n">arr</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span> <span class="p">];</span>         <span class="n">vs</span><span class="p">.</span>     <span class="n">var</span> <span class="n">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="n">f</span><span class="p">({</span><span class="nl">a</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nl">b</span> <span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="nl">c</span> <span class="p">:</span> <span class="mi">3</span><span class="p">});</span>              <span class="n">f</span><span class="p">({</span><span class="nl">a</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nl">b</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="nl">c</span><span class="p">:</span> <span class="mi">3</span><span class="p">});</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>SpacesInParentheses</strong> (<code>bool</code>)</li>
+</ul>
+<blockquote>
+<p>() 中的空格处理</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="nb">true</span><span class="o">:</span>                                  <span class="nb">false</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl"><span class="n">t</span> <span class="n">f</span><span class="p">(</span> <span class="n">Deleted</span> <span class="o">&amp;</span> <span class="p">)</span> <span class="o">&amp;</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>   <span class="n">vs</span><span class="p">.</span>     <span class="n">t</span> <span class="n">f</span><span class="p">(</span><span class="n">Deleted</span> <span class="o">&amp;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>SpacesInSquareBrackets</strong> (<code>bool</code>)</li>
+</ul>
+<blockquote>
+<p>[与]中的空格处理</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="nb">true</span><span class="o">:</span>                                  <span class="nb">false</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">a</span><span class="p">[</span> <span class="mi">5</span> <span class="p">];</span>                    <span class="n">vs</span><span class="p">.</span>     <span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">[]</span><span class="o">&gt;</span> <span class="n">foo</span><span class="p">()</span> <span class="p">{}</span> <span class="c1">// Won&#39;t be affected
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>Standard</strong> (<code>LanguageStandard</code>)</li>
+</ul>
+<blockquote>
+<p>C++标准的类型，Format compatible with this standard, e.g. use <code>A&lt;A&lt;int&gt; &gt;</code> instead of <code>A&lt;A&lt;int&gt;&gt;</code> for <code>LS_Cpp03</code>.</p>
+</blockquote>
+<ul>
+<li>
+<p><code>LS_Cpp03</code> (in configuration: <code>Cpp03</code>) Use C++03-compatible syntax.</p>
+</li>
+<li>
+<p><code>LS_Cpp11</code> (in configuration: <code>Cpp11</code>) Use features of C++11, C++14 and C++1z (e.g. <code>A&lt;A&lt;int&gt;&gt;</code> instead of <code>A&lt;A&lt;int&gt; &gt;</code>).</p>
+</li>
+<li>
+<p><code>LS_Auto</code> (in configuration: <code>Auto</code>) Automatic detection based on the input.</p>
+</li>
+<li>
+<p><strong>TabWidth</strong> (<code>unsigned</code>)</p>
+</li>
+</ul>
+<blockquote>
+<p>设置tab stops的缩进量</p>
+</blockquote>
+<ul>
+<li><strong>UseTab</strong> (<code>UseTabStyle</code>)</li>
+</ul>
+<blockquote>
+<p>是否使用tab</p>
+</blockquote>
+<p><a name="p9ewlg"></a></p>
+<h2 id="clang-format-配置文件示例">.clang-format 配置文件示例</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span><span class="lnt">175
+</span><span class="lnt">176
+</span><span class="lnt">177
+</span><span class="lnt">178
+</span><span class="lnt">179
+</span><span class="lnt">180
+</span><span class="lnt">181
+</span><span class="lnt">182
+</span><span class="lnt">183
+</span><span class="lnt">184
+</span><span class="lnt">185
+</span><span class="lnt">186
+</span><span class="lnt">187
+</span><span class="lnt">188
+</span><span class="lnt">189
+</span><span class="lnt">190
+</span><span class="lnt">191
+</span><span class="lnt">192
+</span><span class="lnt">193
+</span><span class="lnt">194
+</span><span class="lnt">195
+</span><span class="lnt">196
+</span><span class="lnt">197
+</span><span class="lnt">198
+</span><span class="lnt">199
+</span><span class="lnt">200
+</span><span class="lnt">201
+</span><span class="lnt">202
+</span><span class="lnt">203
+</span><span class="lnt">204
+</span><span class="lnt">205
+</span><span class="lnt">206
+</span><span class="lnt">207
+</span><span class="lnt">208
+</span><span class="lnt">209
+</span><span class="lnt">210
+</span><span class="lnt">211
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># Style options please see https://clang.llvm.org/docs/ClangFormatStyleOptions.html</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># The number of columns to use for indentation</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">IndentWidth</span><span class="p">:</span><span class="w"> </span><span class="m">4</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">Language</span><span class="p">:</span><span class="w">        </span><span class="l">Cpp</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">BasedOnStyle</span><span class="p">:</span><span class="w">  </span><span class="l">Google</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># The extra indent or outdent of access modifiers, e.g. public</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">AccessModifierOffset</span><span class="p">:</span><span class="w"> </span>-<span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 括号中的参数是否需要对齐</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">AlignAfterOpenBracket</span><span class="p">:</span><span class="w"> </span><span class="l">Align</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 连续的赋值语句是否需要在&#39;=&#39;处对齐</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">AlignConsecutiveAssignments</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 连续声明的变更是否需要对齐</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">AlignConsecutiveDeclarations</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Options for aligning backslashes in escaped newlines</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">AlignEscapedNewlines</span><span class="p">:</span><span class="w"> </span><span class="l">Left</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 操作数及三元操作符对齐</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">AlignOperands</span><span class="p">:</span><span class="w">   </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 注释对齐</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">AlignTrailingComments</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 函数声明过长时是否每个参数作为一行处理</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">AllowAllParametersOfDeclarationOnNextLine</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Allows contracting simple braced statements to a single line</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">AllowShortBlocksOnASingleLine</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># case关键字是否与语句放在一行</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">AllowShortCaseLabelsOnASingleLine</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 单语句或短函数是否可以放在一行</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">AllowShortFunctionsOnASingleLine</span><span class="p">:</span><span class="w"> </span><span class="l">Inline</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># IF 单语句代码是否可以放在一行</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">AllowShortIfStatementsOnASingleLine</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 单语句循环体是否可以与循环放在一行</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">AllowShortLoopsOnASingleLine</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># AlwaysBreakAfterDefinitionReturnType 选项将被弃用</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">AlwaysBreakAfterDefinitionReturnType</span><span class="p">:</span><span class="w"> </span><span class="l">None</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># The function declaration return type breaking style to use</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">AlwaysBreakAfterReturnType</span><span class="p">:</span><span class="w"> </span><span class="l">None</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 多行字符串是否需要另起一行</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">AlwaysBreakBeforeMultilineStrings</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 模板声明时是否需要另起一行</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">AlwaysBreakTemplateDeclarations</span><span class="p">:</span><span class="w"> </span><span class="kc">Yes</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 函数调用时参数打包对齐</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">BinPackArguments</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 函数声明或定义时是否需要参数打包对齐</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">BinPackParameters</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 大括号的处理行为</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">BraceWrapping</span><span class="p">:</span><span class="w">   
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">AfterClass</span><span class="p">:</span><span class="w">      </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">AfterControlStatement</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">AfterEnum</span><span class="p">:</span><span class="w">       </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">AfterFunction</span><span class="p">:</span><span class="w">   </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">AfterNamespace</span><span class="p">:</span><span class="w">  </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">AfterObjCDeclaration</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">AfterStruct</span><span class="p">:</span><span class="w">     </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">AfterUnion</span><span class="p">:</span><span class="w">      </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">AfterExternBlock</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">BeforeCatch</span><span class="p">:</span><span class="w">     </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">BeforeElse</span><span class="p">:</span><span class="w">      </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">IndentBraces</span><span class="p">:</span><span class="w">    </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">SplitEmptyFunction</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">SplitEmptyRecord</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">SplitEmptyNamespace</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># The way to wrap binary operators</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">BreakBeforeBinaryOperators</span><span class="p">:</span><span class="w"> </span><span class="l">None</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># The brace breaking style to use</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">BreakBeforeBraces</span><span class="p">:</span><span class="w"> </span><span class="l">Attach</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">BreakBeforeInheritanceComma</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># The inheritance list style to use</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">BreakInheritanceList</span><span class="p">:</span><span class="w"> </span><span class="l">AfterColon</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 三元操作号对齐</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">BreakBeforeTernaryOperators</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">BreakConstructorInitializersBeforeComma</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">BreakConstructorInitializers</span><span class="p">:</span><span class="w"> </span><span class="l">BeforeColon</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">BreakAfterJavaFieldAnnotations</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Allow breaking string literals when formatting</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">BreakStringLiterals</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 允许每行字符最大长度</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">ColumnLimit</span><span class="p">:</span><span class="w">     </span><span class="m">120</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">CommentPragmas</span><span class="p">:</span><span class="w">  </span><span class="s1">&#39;^ IWYU pragma:&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 是否允许多个namespace声明在同一行</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">CompactNamespaces</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># If the constructor initializers don’t fit on a line, put each initializer on its own line</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">ConstructorInitializerAllOnOneLineOrOnePerLine</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># The number of characters to use for indentation of constructor initializer lists as well as inheritance lists</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">ConstructorInitializerIndentWidth</span><span class="p">:</span><span class="w"> </span><span class="m">4</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Indent width for line continuations</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">ContinuationIndentWidth</span><span class="p">:</span><span class="w"> </span><span class="m">4</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">Cpp11BracedListStyle</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">DerivePointerAlignment</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 禁止代码格式化</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">DisableFormat</span><span class="p">:</span><span class="w">   </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">ExperimentalAutoDetectBinPacking</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 是否自动添加namespace结束的注释</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">FixNamespaceComments</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">ForEachMacros</span><span class="p">:</span><span class="w">   
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">foreach</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">Q_FOREACH</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">BOOST_FOREACH</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Dependent on the value, multiple #include blocks can be sorted as one and divided based on category</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">IncludeBlocks</span><span class="p">:</span><span class="w">   </span><span class="l">Preserve</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Regular expressions denoting the different #include categories used for ordering #includes</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">IncludeCategories</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">Regex</span><span class="p">:</span><span class="w">           </span><span class="s1">&#39;^&lt;ext/.*\.h&gt;&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">Priority</span><span class="p">:</span><span class="w">        </span><span class="m">2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">Regex</span><span class="p">:</span><span class="w">           </span><span class="s1">&#39;^&lt;.*\.h&gt;&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">Priority</span><span class="p">:</span><span class="w">        </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">Regex</span><span class="p">:</span><span class="w">           </span><span class="s1">&#39;^&lt;.*&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">Priority</span><span class="p">:</span><span class="w">        </span><span class="m">2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">Regex</span><span class="p">:</span><span class="w">           </span><span class="s1">&#39;.*&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">Priority</span><span class="p">:</span><span class="w">        </span><span class="m">3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">IncludeIsMainRegex</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;([-_](test|unittest))?$&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># case关键字是否需要缩进</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">IndentCaseLabels</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 预处理指定或宏是否需要缩进</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">IndentPPDirectives</span><span class="p">:</span><span class="w"> </span><span class="l">None</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 当函数声明的返回值与函数名不在一行时，函数名是否需要缩进</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">IndentWrappedFunctionNames</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">JavaScriptQuotes</span><span class="p">:</span><span class="w"> </span><span class="l">Leave</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">JavaScriptWrapImports</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 是否在代码段前添加空格</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">KeepEmptyLinesAtTheStartOfBlocks</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">MacroBlockBegin</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">MacroBlockEnd</span><span class="p">:</span><span class="w">   </span><span class="s1">&#39;&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 允许最大的空行数量</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">MaxEmptyLinesToKeep</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># namespace中的子namespace与代码是否需要缩进</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">NamespaceIndentation</span><span class="p">:</span><span class="w"> </span><span class="l">None</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">ObjCBinPackProtocolList</span><span class="p">:</span><span class="w"> </span><span class="l">Never</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">ObjCBlockIndentWidth</span><span class="p">:</span><span class="w"> </span><span class="m">2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">ObjCSpaceAfterProperty</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">ObjCSpaceBeforeProtocolList</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">PenaltyBreakAssignment</span><span class="p">:</span><span class="w"> </span><span class="m">2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">PenaltyBreakBeforeFirstCallParameter</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">PenaltyBreakComment</span><span class="p">:</span><span class="w"> </span><span class="m">300</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">PenaltyBreakFirstLessLess</span><span class="p">:</span><span class="w"> </span><span class="m">120</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">PenaltyBreakString</span><span class="p">:</span><span class="w"> </span><span class="m">1000</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">PenaltyBreakTemplateDeclaration</span><span class="p">:</span><span class="w"> </span><span class="m">10</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">PenaltyExcessCharacter</span><span class="p">:</span><span class="w"> </span><span class="m">1000000</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 函数允许的最大长度(行)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">PenaltyReturnTypeOnItsOwnLine</span><span class="p">:</span><span class="w"> </span><span class="m">200</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 指针与引用的对齐方式</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">PointerAlignment</span><span class="p">:</span><span class="w"> </span><span class="l">Left</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Defines hints for detecting supported languages code blocks in raw strings</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">RawStringFormats</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">Language</span><span class="p">:</span><span class="w">        </span><span class="l">Cpp</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">Delimiters</span><span class="p">:</span><span class="w">      
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">cc</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">CC</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">cpp</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">Cpp</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">CPP</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s1">&#39;c++&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s1">&#39;C++&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">CanonicalDelimiter</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">BasedOnStyle</span><span class="p">:</span><span class="w">    </span><span class="l">google</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">Language</span><span class="p">:</span><span class="w">        </span><span class="l">TextProto</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">Delimiters</span><span class="p">:</span><span class="w">      
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">pb</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">PB</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">proto</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">PROTO</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">EnclosingFunctions</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">EqualsProto</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">EquivToProto</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">PARSE_PARTIAL_TEXT_PROTO</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">PARSE_TEST_PROTO</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">PARSE_TEXT_PROTO</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">ParseTextOrDie</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">ParseTextProtoOrDie</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">CanonicalDelimiter</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">BasedOnStyle</span><span class="p">:</span><span class="w">    </span><span class="l">google</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 是否对注释重新排列</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">ReflowComments</span><span class="p">:</span><span class="w">  </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 是否对 #include 的头文件进行排序</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">SortIncludes</span><span class="p">:</span><span class="w">    </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 是否对using的namespace排序</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">SortUsingDeclarations</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># C语言风格的类型转换的变量前是否添加空格</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">SpaceAfterCStyleCast</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 模板关键字后是否需要添加空格</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">SpaceAfterTemplateKeyword</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 赋值操作符前否是否需要添加空格</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">SpaceBeforeAssignmentOperators</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># C11风格的对象初始化是否需要添加空格</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">SpaceBeforeCpp11BracedList</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 成员初始化列表的冒号前是否需要添加空格</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">SpaceBeforeCtorInitializerColon</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 类继承时冒号前是否添加空格</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">SpaceBeforeInheritanceColon</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 圆括号前后是否要添加空格</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">SpaceBeforeParens</span><span class="p">:</span><span class="w"> </span><span class="l">ControlStatements</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># range-based的循环中的冒号(:)前是否添加空格</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">SpaceBeforeRangeBasedForLoopColon</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 空括号()中是否需要添加空格</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">SpaceInEmptyParentheses</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 行注释前需要添加的空格数量</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">SpacesBeforeTrailingComments</span><span class="p">:</span><span class="w"> </span><span class="m">2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># &lt;&gt;中是否需要添加空格</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">SpacesInAngles</span><span class="p">:</span><span class="w">  </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 容器列表中是否需要添加空格</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">SpacesInContainerLiterals</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># C语言风格的类型转换时()中是否需要添加空格</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">SpacesInCStyleCastParentheses</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># ()中是否需要添加空格</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">SpacesInParentheses</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># []中是否需要添加空格</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">SpacesInSquareBrackets</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 自动识别C++标准版本</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">Standard</span><span class="p">:</span><span class="w">        </span><span class="l">Auto</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">UseTab</span><span class="p">:</span><span class="w">          </span><span class="l">Never</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nn">...</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><a name="nktaoo"></a></p>
+<h1 id="编辑器支持clang-format介绍">编辑器支持Clang-format介绍</h1>
+<p><a name="nklwgc"></a></p>
+<h2 id="vscode-coding-formating插件">VSCode Coding Formating插件</h2>
+<p>VSCode的C/C++插件使用Clang-Format支持源代码格式化。</p>
+<p><a name="xxpksc"></a></p>
+<h3 id="编辑器设置">编辑器设置</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">editor.formatOnSave - 保存文档时自动对代码格式化
+</span></span><span class="line"><span class="cl">editor.formatOnType - 当用户输入分号（;）时对代码进行格式化
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>注：</strong> 当对代码进行格式化时，VSCode优先检查当前工作空间是否存在.clang-format文件，如果存在则采用此文件进行格式化，否则采用默认的C_Cpp.clang_format_fallbackStyle进行格式化。同时可以通过C_Cpp.clang_format_path指定本机指定版本的clang-format工具代码默认的版本。</p>
+<p><a name="fagmnp"></a></p>
+<h2 id="vim集成">VIM集成</h2>
+<ul>
+<li>请参考 <a href="https://clang.llvm.org/docs/ClangFormat.html#vim-integration" target="_blank" rel="noopener noreffer ">https://clang.llvm.org/docs/ClangFormat.html#vim-integration</a></li>
+</ul>
+<p><a name="wtgqan"></a></p>
+<h2 id="emacs集成">Emacs集成</h2>
+<ul>
+<li>请参考 <a href="https://clang.llvm.org/docs/ClangFormat.html#emacs-integration" target="_blank" rel="noopener noreffer ">https://clang.llvm.org/docs/ClangFormat.html#emacs-integration</a></li>
+</ul>
+<p><a name="0lwgiz"></a></p>
+<h1 id="扩展阅读">扩展阅读</h1>
+<ul>
+<li>
+<p><a href="https://code.visualstudio.com/docs/languages/cpp" target="_blank" rel="noopener noreffer ">VSCode Code formatting介绍</a></p>
+</li>
+<li>
+<p><a href="https://clang.llvm.org/docs/ClangFormat.html" target="_blank" rel="noopener noreffer ">Clang-Format 使用说明</a></p>
+</li>
+<li>
+<p><a href="https://clang.llvm.org/docs/ClangFormatStyleOptions.html" target="_blank" rel="noopener noreffer ">Clang-Format Style Options</a></p>
+</li>
+</ul>
+</div><div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></div></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.111.3">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11">LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">素问</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://suwen.disqus.com/embed.js" defer></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/twemoji@14.0.2/dist/twemoji.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":30,"type":"lunr"},"twemoji":true};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
