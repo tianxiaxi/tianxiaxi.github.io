@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>所有文章 - 素问小站</title>
-        <link>https://blog.yygz.org/posts/</link>
+        <link>https://tianxiaxi.github.io/posts/</link>
         <description>所有文章 | 素问小站</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>zanran2046@gmail.com (素问)</managingEditor>
-            <webMaster>zanran2046@gmail.com (素问)</webMaster><lastBuildDate>Sun, 19 Mar 2023 09:41:19 &#43;0800</lastBuildDate><atom:link href="https://blog.yygz.org/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>zanran2046@gmail.com (素问)</webMaster><lastBuildDate>Sun, 19 Mar 2023 09:41:19 &#43;0800</lastBuildDate><atom:link href="https://tianxiaxi.github.io/posts/" rel="self" type="application/rss+xml" /><item>
     <title>Github项目对比 - rax VS flutter VS taro VS Hippy VS chameleon</title>
-    <link>https://blog.yygz.org/2023/03/github_repo_compare_rax_vsflutter_vstaro_vshippy_vschameleon/</link>
+    <link>https://tianxiaxi.github.io/2023/03/github_repo_compare_rax_vsflutter_vstaro_vshippy_vschameleon/</link>
     <pubDate>Sun, 19 Mar 2023 09:41:19 &#43;0800</pubDate>
     <author>素问</author>
-    <guid>https://blog.yygz.org/2023/03/github_repo_compare_rax_vsflutter_vstaro_vshippy_vschameleon/</guid>
+    <guid>https://tianxiaxi.github.io/2023/03/github_repo_compare_rax_vsflutter_vstaro_vshippy_vschameleon/</guid>
     <description><![CDATA[rax VS flutter VS taro VS Hippy VS chameleon 对比分析 本文档更新时间: 2023-03-19
 对比项 rax flutter taro Hippy chameleon 仓库名称 rax flutter taro Hippy chameleon 是否公开 public public public public public 是否归档 未归档 未归档 未归档 未归档 未归档 创建时间 2016-10-14 07:53:50 2015-03-06 22:54:58 2018-04-08 09:32:26 2019-11-15 01:55:31 2019-01-18 14:41:35 创建时间(月) 截止目前共 78 个月 截止目前共 97 个月 截止目前共 60 个月 截止目前共 40 个月 截止目前共 50 个月 关注度 Watch: 204
 Fork: 659
@@ -17,10 +17,10 @@ Starred: 7873]]></description>
 </item>
 <item>
     <title>Github 开源项目对比分析 - axum VS Rocket VS actix-web</title>
-    <link>https://blog.yygz.org/2023/03/github_repo_compare_axum_vsrocket_vsactix-web/</link>
+    <link>https://tianxiaxi.github.io/2023/03/github_repo_compare_axum_vsrocket_vsactix-web/</link>
     <pubDate>Wed, 15 Mar 2023 20:12:33 &#43;0800</pubDate>
     <author>素问</author>
-    <guid>https://blog.yygz.org/2023/03/github_repo_compare_axum_vsrocket_vsactix-web/</guid>
+    <guid>https://tianxiaxi.github.io/2023/03/github_repo_compare_axum_vsrocket_vsactix-web/</guid>
     <description><![CDATA[axum VS Rocket VS actix-web 对比分析 本文档更新时间: 2023-03-15
 对比项 axum Rocket actix-web 仓库名称 axum Rocket actix-web 是否公开 public public public 是否归档 未归档 未归档 未归档 创建时间 2021-05-30 09:22:25 2016-03-18 02:50:18 2017-09-30 15:30:02 创建时间(月) 截止目前共 21 个月 截止目前共 85 个月 截止目前共 66 个月 关注度 Watch: 93
 Fork: 638
@@ -35,10 +35,10 @@ Opened Issues: 147 平均每月关注度 Watch: 4]]></description>
 </item>
 <item>
     <title>Github 开源项目对比分析 - AppFlowy VS AFFiNE VS logseq</title>
-    <link>https://blog.yygz.org/2023/03/github_repo_compare_appflowy_vsaffine_vslogseq/</link>
+    <link>https://tianxiaxi.github.io/2023/03/github_repo_compare_appflowy_vsaffine_vslogseq/</link>
     <pubDate>Wed, 15 Mar 2023 20:03:13 &#43;0800</pubDate>
     <author>素问</author>
-    <guid>https://blog.yygz.org/2023/03/github_repo_compare_appflowy_vsaffine_vslogseq/</guid>
+    <guid>https://tianxiaxi.github.io/2023/03/github_repo_compare_appflowy_vsaffine_vslogseq/</guid>
     <description><![CDATA[AppFlowy VS AFFiNE VS logseq 对比分析 本文档更新时间: 2023-03-15
 对比项 AppFlowy AFFiNE logseq 仓库名称 AppFlowy AFFiNE logseq 是否公开 public public public 是否归档 未归档 未归档 未归档 创建时间 2021-06-16 12:56:48 2022-07-31 18:45:21 2020-05-23 00:06:06 创建时间(月) 截止目前共 21 个月 截止目前共 7 个月 截止目前共 34 个月 关注度 Watch: 291
 Fork: 1912
@@ -53,10 +53,10 @@ Opened Issues: 1408 平均每月关注度 Watch: 13]]></description>
 </item>
 <item>
     <title>mongoose介绍</title>
-    <link>https://blog.yygz.org/2023/03/mongoose/</link>
+    <link>https://tianxiaxi.github.io/2023/03/mongoose/</link>
     <pubDate>Thu, 09 Mar 2023 08:51:57 &#43;0800</pubDate>
     <author>素问</author>
-    <guid>https://blog.yygz.org/2023/03/mongoose/</guid>
+    <guid>https://tianxiaxi.github.io/2023/03/mongoose/</guid>
     <description><![CDATA[mongoose介绍 mongoose 是一个标准的 C 语言网络通信模块，是嵌入式网络编程的瑞士军刀。mongoose 提供非阻塞的事件驱动的 TCP, UDP, HTTP, WebSocket, CoAP, MQTT 的服务端与客户端模式的APIs。
 mongoose 主要包含如下功能：
 Cross-platform: works on Linux/UNIX, MacOS, QNX, eCos, Windows, Android, iPhone, FreeRTOS (TI CC3200, ESP8266), etc
@@ -70,10 +70,10 @@ CoAP client, CoAP server]]></description>
 </item>
 <item>
     <title>前端存储方案</title>
-    <link>https://blog.yygz.org/2023/03/frontend_storage/</link>
+    <link>https://tianxiaxi.github.io/2023/03/frontend_storage/</link>
     <pubDate>Thu, 09 Mar 2023 08:44:39 &#43;0800</pubDate>
     <author>素问</author>
-    <guid>https://blog.yygz.org/2023/03/frontend_storage/</guid>
+    <guid>https://tianxiaxi.github.io/2023/03/frontend_storage/</guid>
     <description><![CDATA[cookie/session cookie cookie是一种客户端会话跟踪技术，用于将网页的数据存储到浏览器中。当关闭浏览器或到过期时间时，cookie将失效。
 cookie存在大小限制，一般个数限制为20~50，大小限制在4KB左右。
 cookie在每次请求时将携带在HTTP头中，如果cookie保存过多数据可能存在性能问题。
@@ -107,10 +107,10 @@ cookie: 使用cookie存储用户登陆状态是目前Web开发主流中的主流
 </item>
 <item>
     <title>读书笔记 - [季羡林]读书与做人</title>
-    <link>https://blog.yygz.org/2023/03/jixianlin_dushu_yu_zuoren/</link>
+    <link>https://tianxiaxi.github.io/2023/03/jixianlin_dushu_yu_zuoren/</link>
     <pubDate>Thu, 09 Mar 2023 08:19:15 &#43;0800</pubDate>
     <author>素问</author>
-    <guid>https://blog.yygz.org/2023/03/jixianlin_dushu_yu_zuoren/</guid>
+    <guid>https://tianxiaxi.github.io/2023/03/jixianlin_dushu_yu_zuoren/</guid>
     <description><![CDATA[《读书与做人》简介 一代学术宗师季羡林先生，道德高尚，学问渊深，文章亦足以动人。
 季老谈读书，深入浅出，举重若轻，以大学者而写作小文章，从中可见出一代学问家对学术的真诚与崇敬，读者亦可从中体悟到文史学科的一般入门途径。
 季老论人生，信笔拈来，娓娓道出，以近于期颐之历练与心态，平和面对人世间的种种苦难，深于情，而不矫揉造作；明于理，而以平实朴素笔调发之，可给人以启迪与心灵的抚慰。
@@ -122,19 +122,19 @@ cookie: 使用cookie存储用户登陆状态是目前Web开发主流中的主流
 </item>
 <item>
     <title>Clang format for C/C&#43;&#43;/Java/JavaScript/Object-C</title>
-    <link>https://blog.yygz.org/2023/03/clang_format/</link>
+    <link>https://tianxiaxi.github.io/2023/03/clang_format/</link>
     <pubDate>Thu, 09 Mar 2023 08:12:07 &#43;0800</pubDate>
     <author>素问</author>
-    <guid>https://blog.yygz.org/2023/03/clang_format/</guid>
+    <guid>https://tianxiaxi.github.io/2023/03/clang_format/</guid>
     <description><![CDATA[Clang-format简介 clang-format是一个代码格式化的工具，支持C/C++/Java/JavaScript/Objective-C/Protobuf等多种语言，并提供LLVM、Google、Visual Studio（仅VSCode支持）、Chromium、Mozilla、WebKit等多种默认代码规范支持。
 Usage 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 $ clang-format -help OVERVIEW: A tool to format C/C++/Java/JavaScript/Objective-C/Protobuf code.]]></description>
 </item>
 <item>
     <title>个人常用工具集</title>
-    <link>https://blog.yygz.org/2023/03/personal-recommend-utils/</link>
+    <link>https://tianxiaxi.github.io/2023/03/personal-recommend-utils/</link>
     <pubDate>Tue, 07 Mar 2023 08:37:14 &#43;0800</pubDate>
     <author>素问</author>
-    <guid>https://blog.yygz.org/2023/03/personal-recommend-utils/</guid>
+    <guid>https://tianxiaxi.github.io/2023/03/personal-recommend-utils/</guid>
     <description><![CDATA[开发必备工具 VSCode Website: https://code.visualstudio.com/ 简介：This is the only editor which I used for my develop career since vscode released. Visual Studio Code is a lightweight but powerful source code editor which runs on your desktop and is available for Windows, macOS and Linux. It comes with built-in support for JavaScript, TypeScript and Node.js and has a rich ecosystem of extensions for other languages and runtimes (such as C++, C#, Java, Python, PHP, Go, .]]></description>
 </item>
 </channel>

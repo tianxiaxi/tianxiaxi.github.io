@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>AFFiNE - 标签 - 素问小站</title>
-        <link>https://blog.yygz.org/tags/affine/</link>
+        <link>https://tianxiaxi.github.io/tags/affine/</link>
         <description>AFFiNE - 标签 - 素问小站</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>zanran2046@gmail.com (素问)</managingEditor>
-            <webMaster>zanran2046@gmail.com (素问)</webMaster><lastBuildDate>Wed, 15 Mar 2023 20:03:13 &#43;0800</lastBuildDate><atom:link href="https://blog.yygz.org/tags/affine/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>zanran2046@gmail.com (素问)</webMaster><lastBuildDate>Wed, 15 Mar 2023 20:03:13 &#43;0800</lastBuildDate><atom:link href="https://tianxiaxi.github.io/tags/affine/" rel="self" type="application/rss+xml" /><item>
     <title>Github 开源项目对比分析 - AppFlowy VS AFFiNE VS logseq</title>
-    <link>https://blog.yygz.org/2023/03/github_repo_compare_appflowy_vsaffine_vslogseq/</link>
+    <link>https://tianxiaxi.github.io/2023/03/github_repo_compare_appflowy_vsaffine_vslogseq/</link>
     <pubDate>Wed, 15 Mar 2023 20:03:13 &#43;0800</pubDate>
     <author>素问</author>
-    <guid>https://blog.yygz.org/2023/03/github_repo_compare_appflowy_vsaffine_vslogseq/</guid>
+    <guid>https://tianxiaxi.github.io/2023/03/github_repo_compare_appflowy_vsaffine_vslogseq/</guid>
     <description><![CDATA[AppFlowy VS AFFiNE VS logseq 对比分析 本文档更新时间: 2023-03-15
 对比项 AppFlowy AFFiNE logseq 仓库名称 AppFlowy AFFiNE logseq 是否公开 public public public 是否归档 未归档 未归档 未归档 创建时间 2021-06-16 12:56:48 2022-07-31 18:45:21 2020-05-23 00:06:06 创建时间(月) 截止目前共 21 个月 截止目前共 7 个月 截止目前共 34 个月 关注度 Watch: 291
 Fork: 1912
