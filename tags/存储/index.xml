@@ -6,10 +6,10 @@
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>zanran2046@gmail.com (素问)</managingEditor>
             <webMaster>zanran2046@gmail.com (素问)</webMaster><lastBuildDate>Thu, 09 Mar 2023 08:44:39 &#43;0800</lastBuildDate><atom:link href="https://blog.yygz.org/tags/%E5%AD%98%E5%82%A8/" rel="self" type="application/rss+xml" /><item>
     <title>前端存储方案</title>
-    <link>https://blog.yygz.org/program/frontend/frontend_storage/</link>
+    <link>https://blog.yygz.org/2023/03/frontend_storage/</link>
     <pubDate>Thu, 09 Mar 2023 08:44:39 &#43;0800</pubDate>
     <author>素问</author>
-    <guid>https://blog.yygz.org/program/frontend/frontend_storage/</guid>
+    <guid>https://blog.yygz.org/2023/03/frontend_storage/</guid>
     <description><![CDATA[cookie/session cookie cookie是一种客户端会话跟踪技术，用于将网页的数据存储到浏览器中。当关闭浏览器或到过期时间时，cookie将失效。
 cookie存在大小限制，一般个数限制为20~50，大小限制在4KB左右。
 cookie在每次请求时将携带在HTTP头中，如果cookie保存过多数据可能存在性能问题。

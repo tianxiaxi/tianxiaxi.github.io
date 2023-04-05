@@ -6,10 +6,10 @@
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>zanran2046@gmail.com (素问)</managingEditor>
             <webMaster>zanran2046@gmail.com (素问)</webMaster><lastBuildDate>Sun, 19 Mar 2023 09:41:19 &#43;0800</lastBuildDate><atom:link href="https://blog.yygz.org/tags/taro/" rel="self" type="application/rss+xml" /><item>
     <title>Github项目对比 - rax VS flutter VS taro VS Hippy VS chameleon</title>
-    <link>https://blog.yygz.org/program/github/github_repo_compare_rax_vsflutter_vstaro_vshippy_vschameleon/</link>
+    <link>https://blog.yygz.org/2023/03/github_repo_compare_rax_vsflutter_vstaro_vshippy_vschameleon/</link>
     <pubDate>Sun, 19 Mar 2023 09:41:19 &#43;0800</pubDate>
     <author>素问</author>
-    <guid>https://blog.yygz.org/program/github/github_repo_compare_rax_vsflutter_vstaro_vshippy_vschameleon/</guid>
+    <guid>https://blog.yygz.org/2023/03/github_repo_compare_rax_vsflutter_vstaro_vshippy_vschameleon/</guid>
     <description><![CDATA[rax VS flutter VS taro VS Hippy VS chameleon 对比分析 本文档更新时间: 2023-03-19
 对比项 rax flutter taro Hippy chameleon 仓库名称 rax flutter taro Hippy chameleon 是否公开 public public public public public 是否归档 未归档 未归档 未归档 未归档 未归档 创建时间 2016-10-14 07:53:50 2015-03-06 22:54:58 2018-04-08 09:32:26 2019-11-15 01:55:31 2019-01-18 14:41:35 创建时间(月) 截止目前共 78 个月 截止目前共 97 个月 截止目前共 60 个月 截止目前共 40 个月 截止目前共 50 个月 关注度 Watch: 204
 Fork: 659

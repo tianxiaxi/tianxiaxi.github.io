@@ -12,11 +12,11 @@ Disallow: /tags/github/
 
 Disallow: /categories/github/
 
-Disallow: /program/github/github_repo_compare_rax_vsflutter_vstaro_vshippy_vschameleon/
+Disallow: /2023/03/github_repo_compare_rax_vsflutter_vstaro_vshippy_vschameleon/
 
 Disallow: /tags/hippy/
 
-Disallow: /program/
+Disallow: /posts/
 
 Disallow: /tags/rax/
 
@@ -28,7 +28,7 @@ Disallow: /tags/actix-web/
 
 Disallow: /tags/axum/
 
-Disallow: /program/github/github_repo_compare_axum_vsrocket_vsactix-web/
+Disallow: /2023/03/github_repo_compare_axum_vsrocket_vsactix-web/
 
 Disallow: /tags/rocket/
 
@@ -36,7 +36,7 @@ Disallow: /tags/affine/
 
 Disallow: /tags/appflowy/
 
-Disallow: /program/github/github_repo_compare_appflowy_vsaffine_vslogseq/
+Disallow: /2023/03/github_repo_compare_appflowy_vsaffine_vslogseq/
 
 Disallow: /tags/logseq/
 
@@ -44,7 +44,7 @@ Disallow: /
 
 Disallow: /tags/mongoose/
 
-Disallow: /program/network/mongoose/
+Disallow: /2023/03/mongoose/
 
 Disallow: /tags/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/
 
@@ -52,9 +52,7 @@ Disallow: /tags/%E5%AD%98%E5%82%A8/
 
 Disallow: /tags/%E5%89%8D%E7%AB%AF/
 
-Disallow: /program/frontend/frontend_storage/
-
-Disallow: /posts/
+Disallow: /2023/03/frontend_storage/
 
 Disallow: /tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/
 
@@ -62,13 +60,11 @@ Disallow: /categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/
 
 Disallow: /2023/03/jixianlin_dushu_yu_zuoren/
 
-Disallow: /program/format/clang_format/
+Disallow: /2023/03/clang_format/
 
 Disallow: /tags/clang-format/
 
 Disallow: /tags/%E4%BB%A3%E7%A0%81%E6%A0%BC%E5%BC%8F%E5%8C%96/
-
-Disallow: /soft/
 
 Disallow: /tags/software/
 
@@ -79,10 +75,4 @@ Disallow: /tags/utils/
 Disallow: /2023/03/personal-recommend-utils/
 
 Disallow: /archives/
-
-Disallow: /tags/installation/
-
-Disallow: /tags/content/
-
-Disallow: /tags/configuration/
 
